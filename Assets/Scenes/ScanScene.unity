@@ -583,7 +583,7 @@ MonoBehaviour:
   _timeUpdateMarker: 3
   TargetAnchor: {fileID: 597781625}
   Anchor: {fileID: 0}
-  Marker: {fileID: 1773318138665028, guid: c92e4baf27c5e744aaaafacbec71d145, type: 2}
+  Marker: {fileID: 1629373547865416, guid: dd188e58829aad44499bc6eedfe6d424, type: 2}
 --- !u!4 &1049049480
 Transform:
   m_ObjectHideFlags: 0
@@ -790,7 +790,7 @@ MonoBehaviour:
   _timeUpdateMarker: 3
   TargetAnchor: {fileID: 1909449737}
   Anchor: {fileID: 0}
-  Marker: {fileID: 1773318138665028, guid: c92e4baf27c5e744aaaafacbec71d145, type: 2}
+  Marker: {fileID: 1629373547865416, guid: ebf4ffeaa9841bc4f9bdd6e8e93b6974, type: 2}
 --- !u!4 &1485423313
 Transform:
   m_ObjectHideFlags: 0
@@ -842,6 +842,18 @@ Prefab:
     - target: {fileID: 4384734610548754, guid: dd188e58829aad44499bc6eedfe6d424, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384734610548754, guid: dd188e58829aad44499bc6eedfe6d424, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.07675657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384734610548754, guid: dd188e58829aad44499bc6eedfe6d424, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.10855572
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384734610548754, guid: dd188e58829aad44499bc6eedfe6d424, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.36550748
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd188e58829aad44499bc6eedfe6d424, type: 2}
@@ -1103,6 +1115,18 @@ Prefab:
     - target: {fileID: 4384734610548754, guid: ebf4ffeaa9841bc4f9bdd6e8e93b6974, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384734610548754, guid: ebf4ffeaa9841bc4f9bdd6e8e93b6974, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.07675657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384734610548754, guid: ebf4ffeaa9841bc4f9bdd6e8e93b6974, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.10855572
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384734610548754, guid: ebf4ffeaa9841bc4f9bdd6e8e93b6974, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.36550748
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ebf4ffeaa9841bc4f9bdd6e8e93b6974, type: 2}
