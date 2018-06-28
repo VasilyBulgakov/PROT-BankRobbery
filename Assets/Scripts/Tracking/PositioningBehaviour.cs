@@ -22,6 +22,7 @@ namespace Tracking
 		private void Start()
 		{
 			_unityARAnchorManager = new UnityARAnchorManager();
+			StartLocalization();
 		}
 
 		public void StartLocalization()
