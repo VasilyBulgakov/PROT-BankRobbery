@@ -72,7 +72,7 @@ namespace Tracking
 					update (this);
 					if (Marker!=null) {
 						_myMarker = Instantiate (Marker, Anchor.position, Anchor.rotation);
-						StartCoroutine (HideMarker ());
+						//StartCoroutine (HideMarker ());
 					}
 
 				}
