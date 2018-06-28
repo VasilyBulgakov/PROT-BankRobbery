@@ -13,4 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceGroupName: AnchorImages
   referenceImages:
-  - {fileID: 11400000, guid: bc46010300fae2c42af98d6ba60979e9, type: 2}
+  - {fileID: 11400000, guid: ff754789498f90e4dab253f58f9adf26, type: 2}
+  - {fileID: 11400000, guid: 91c5e3b40de0f394390acea16ea3e216, type: 2}

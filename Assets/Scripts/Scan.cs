@@ -19,6 +19,7 @@ public class Scan : MonoBehaviour {
 		UnityARSessionNativeInterface.ARImageAnchorUpdatedEvent += UpdateImageAnchor;
 		UnityARSessionNativeInterface.ARImageAnchorRemovedEvent += RemoveImageAnchor;
 
+		Debug.Log ("image anchor started");
 	}	
 
 	void AddImageAnchor(ARImageAnchor arImageAnchor)
@@ -30,7 +31,7 @@ public class Scan : MonoBehaviour {
 
 			imageAnchorGO = Instantiate<GameObject> (prefabToGenerate, position, rotation);
 
-			imageAnchorGO.transform.position += GameObject.Find("Anchor1").transform.localPosition; 
+			//	imageAnchorGO.transform.position += GameObject.Find("Anchor1").transform.localPosition; 
 		}
 	}
 	void UpdateImageAnchor(ARImageAnchor arImageAnchor)
