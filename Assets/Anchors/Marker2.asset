@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0414577f9c6b244e696949154859a4af, type: 3}
   m_Name: Marker2
   m_EditorClassIdentifier: 
-  imageName: Marker1
+  imageName: Marker2
   imageTexture: {fileID: 2800000, guid: d1eea5f43ccef7a4da9d947950969f75, type: 3}
   physicalSize: 0.22
