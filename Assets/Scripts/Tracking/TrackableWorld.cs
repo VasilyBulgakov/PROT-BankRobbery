@@ -11,8 +11,15 @@ namespace Tracking
 
         public WallMarker[] Anchors;
 
+
         private void Start()
         {
+        }
+        private void FixedUpdate() {
+            foreach(WallMarker anchor in Anchors)
+            {
+                CorrectWithAnchor(anchor);
+            }
         }
 
         public void CorrectWithAnchor(WallMarker marker)
