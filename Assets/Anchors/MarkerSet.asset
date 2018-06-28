@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c37f7746917f4760aa00e7ff7fd81dc, type: 3}
-  m_Name: ARReferenceImagesSet
+  m_Name: MarkerSet
   m_EditorClassIdentifier: 
-  resourceGroupName: AnchorImages
+  resourceGroupName: AnchorMarkers
   referenceImages:
   - {fileID: 11400000, guid: ff754789498f90e4dab253f58f9adf26, type: 2}
   - {fileID: 11400000, guid: 91c5e3b40de0f394390acea16ea3e216, type: 2}

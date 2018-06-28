@@ -12,14 +12,10 @@ public class Scan : MonoBehaviour {
 	private GameObject prefabToGenerate;
 
 	private GameObject imageAnchorGO;
-
+	bool initialize = false;
 	// Use this for initialization
 	void Start () {
-		UnityARSessionNativeInterface.ARImageAnchorAddedEvent += AddImageAnchor;
-		UnityARSessionNativeInterface.ARImageAnchorUpdatedEvent += UpdateImageAnchor;
-		UnityARSessionNativeInterface.ARImageAnchorRemovedEvent += RemoveImageAnchor;
 
-		Debug.Log ("image anchor started");
 	}	
 
 	void AddImageAnchor(ARImageAnchor arImageAnchor)
@@ -58,8 +54,18 @@ public class Scan : MonoBehaviour {
 
 	}
 
+	void init(){
+		UnityARSessionNativeInterface.ARImageAnchorAddedEvent += AddImageAnchor;
+		UnityARSessionNativeInterface.ARImageAnchorUpdatedEvent += UpdateImageAnchor;
+		UnityARSessionNativeInterface.ARImageAnchorRemovedEvent += RemoveImageAnchor;
+
+		Debug.Log ("image anchor started");
+		initialize = true;
+	}
+
 	// Update is called once per frame
 	void Update () {
-		
+		if(Input.GetKey(KeyCode.Space) && initialize == false)
+			init();
 	}
 }
