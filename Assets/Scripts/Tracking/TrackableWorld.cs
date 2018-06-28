@@ -16,10 +16,12 @@ namespace Tracking
         {
         }
         private void FixedUpdate() {
+           #if UNITY_EDITOR 
             foreach(WallMarker anchor in Anchors)
             {
                 CorrectWithAnchor(anchor);
             }
+            #endif
         }
 
         public void CorrectWithAnchor(WallMarker marker)
