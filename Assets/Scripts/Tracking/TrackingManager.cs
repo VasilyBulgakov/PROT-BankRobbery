@@ -56,9 +56,10 @@ namespace Tracking {
 
         private void OnPlaneFound(GameObject anchor)
         {
-            //Stage.transform.parent = anchor.transform;
-            //Stage.transform.localPosition = Vector3.zero;
-            //Stage.transform.localRotation = Quaternion.identity;
+            Debug.Log("FOUND PLANE!!");
+            Stage.transform.parent = anchor.transform;
+            Stage.transform.localPosition = Vector3.zero;
+            Stage.transform.localRotation = Quaternion.identity;
             Stage.SetActive(true);
         }
 
