@@ -665,9 +665,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cefb4df9e7ceac448ae3a5632f820333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceImage: {fileID: 11400000, guid: ff754789498f90e4dab253f58f9adf26, type: 2}
+  referenceImage: {fileID: 11400000, guid: 91c5e3b40de0f394390acea16ea3e216, type: 2}
   _timeUpdateMarker: 3
-  TargetAnchor: {fileID: 1909449737}
+  TargetAnchor: {fileID: 597781625}
   Anchor: {fileID: 0}
   Marker: {fileID: 1773318138665028, guid: c92e4baf27c5e744aaaafacbec71d145, type: 2}
 --- !u!4 &1049049480
@@ -1108,7 +1108,7 @@ MonoBehaviour:
   Center: {fileID: 1926619967}
   Anchors:
   - {fileID: 1485423312}
-  - {fileID: 0}
+  - {fileID: 1049049479}
 --- !u!4 &1613256097
 Transform:
   m_ObjectHideFlags: 0
@@ -1117,7 +1117,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1613256095}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.077, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1909449737}

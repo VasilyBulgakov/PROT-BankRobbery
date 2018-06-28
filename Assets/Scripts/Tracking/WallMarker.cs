@@ -35,7 +35,7 @@ namespace Tracking
             UnityARSessionNativeInterface.ARImageAnchorAddedEvent += AddImageAnchor;
             UnityARSessionNativeInterface.ARImageAnchorUpdatedEvent += UpdateImageAnchor;
             UnityARSessionNativeInterface.ARImageAnchorRemovedEvent += RemoveImageAnchor;
-            
+            Debug.Log("image anchor events added");
             Anchor = transform;
         }
 

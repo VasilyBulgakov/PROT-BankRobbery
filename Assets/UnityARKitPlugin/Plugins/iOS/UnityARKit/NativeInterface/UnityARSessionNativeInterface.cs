@@ -786,7 +786,7 @@ namespace UnityEngine.XR.iOS
         static void _image_anchor_added(UnityARImageAnchorData anchor)
         {
             if (ARImageAnchorAddedEvent != null)
-            {
+            {                
                 ARImageAnchor arImageAnchor = new ARImageAnchor(anchor);
                 ARImageAnchorAddedEvent(arImageAnchor);
             }
