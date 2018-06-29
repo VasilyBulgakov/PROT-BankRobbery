@@ -81,8 +81,11 @@ namespace Tracking
                 //anim.SetBool("Visible", false);
             }  
             
-            GUI.Box(new Rect(0,0, Screen.width, Screen.height / 4), "delta1" + Anchors[0].deltaScenePos2RealPos.magnitude);
-            GUI.Box(new Rect(0,Screen.height / 4, Screen.width, Screen.height / 4), "delta2" + Anchors[1].deltaScenePos2RealPos.magnitude);          
+            }
+        private void OnGUI() {
+            GUI.Box(new Rect(0,0, Screen.width, 40), "delta1: " + Anchors[0].deltaScenePos2RealPos.magnitude);
+            GUI.Box(new Rect(0,100, Screen.width, 40), "delta2: " + Anchors[1].deltaScenePos2RealPos.magnitude);          
+        
         }
 
         private void OnDrawGizmos()
