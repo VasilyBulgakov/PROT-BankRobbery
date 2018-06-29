@@ -512,7 +512,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4668141354624458, guid: cd5eac68e71609a47bfdbe30770fb42a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.546
       objectReference: {fileID: 0}
     - target: {fileID: 4668141354624458, guid: cd5eac68e71609a47bfdbe30770fb42a, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1009,6 +1009,7 @@ MonoBehaviour:
   debugSpheres: {fileID: 1550914099157014, guid: a514985277e3722488c3d3daa772129b,
     type: 2}
   scanPOIs: []
+  radius: 1
 --- !u!4 &1549470842
 Transform:
   m_ObjectHideFlags: 0
@@ -1043,7 +1044,7 @@ Transform:
   m_PrefabParentObject: {fileID: 4241674676065658, guid: cd5eac68e71609a47bfdbe30770fb42a,
     type: 2}
   m_PrefabInternal: {fileID: 504610663}
---- !u!64 &2130789465
+--- !u!64 &2130789462
 MeshCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1057,3 +1058,34 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 9273377fc45e7e442bb1ee64b6424298, type: 2}
+--- !u!114 &2130789463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2130789460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a90587503aee345a3981c6b51a66ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSource: {fileID: 1549470841}
+  timeout: 4
+--- !u!95 &2130789464
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2130789460}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ddf9e36e64777cb48a1999c1458fbc18, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

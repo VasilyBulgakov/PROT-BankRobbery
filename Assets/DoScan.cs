@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.XR.iOS;
 public class DoScan : MonoBehaviour {
+
+	public delegate void OnAllScanned(GameObject POI_Parent);
+	public static OnAllScanned scannedAllPOIs;
 
 	public GameObject target;
 
@@ -35,42 +39,94 @@ public class DoScan : MonoBehaviour {
             scan();
 	}
 
-	public float radius = 1;
+	public float radius = 0.5f;
+
+	
+
+
 	private void scan()
 	{
 
-		RaycastHit hit;
-		if( !Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward, out hit, 100.0f, 1 << 8))
+		Vector3 hit;
+		if( !getHitFromScene(out hit) && !getHitFromARkit(out hit))
 		{
 			Destroy(instanceSphere);
 			foreach(var s in instanceSpheres)
-			Destroy(s);
+				Destroy(s);
 
-			radius = 1;
-			return;
-		}
-		Debug.DrawLine(Camera.main.transform.position, hit.point,  Color.red, 1);
+			radius = 0.5f;
+		}     
+
+		Debug.DrawLine(Camera.main.transform.position, hit,  Color.red, 1);
 		
 		if(instanceSphere == null)
 		{			
-			instanceSphere = GameObject.Instantiate(debugSphere, hit.point, Quaternion.identity);
+			instanceSphere = GameObject.Instantiate(debugSphere, hit, Quaternion.identity);
 		}
-
-		instanceSphere.transform.position = hit.point;
-		instanceSphere.transform.localScale = new Vector3(radius, radius, radius);
+		else
+		{
+			if( radius < 2 && sqrDist(hit, instanceSphere.transform.position) < Mathf.Pow(radius, 2) )
+			{
+				radius+=0.2f;				
+			}
+			instanceSphere.transform.position = hit;
+		}
+		
+		instanceSphere.transform.localScale = new Vector3(radius*2, radius*2, radius*2);
 
 		foreach(var s in instanceSpheres)
+		{
 			Destroy(s);
-
-		foreach(var roi in scanPOIs)
-		{			
-			if(sqrDist(roi.position, instanceSphere.transform.position) < radius*radius)
-			{
-				instanceSpheres.Add( Instantiate(debugSpheres, roi.position, Quaternion.identity) );				
-			}
-			Debug.Log("dist: " + sqrDist(roi.position, hit.point));
-			Debug.Log("radius2: " + radius*radius);
 		}
+
+		if( isAllInsideSphere(hit, radius, scanPOIs) )
+		{
+			scannedAllPOIs(target);
+		}		
+	}
+
+	private bool getHitFromARkit(out Vector3 hitPos)
+	{
+		hitPos = Vector3.zero;
+		var screenPosition = Camera.main.ScreenToViewportPoint(new Vector3(Screen.width/2, Screen.height/2));
+		ARPoint point = new ARPoint { x = screenPosition.x, y = screenPosition.y };
+
+		var resType = ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent;
+		List<ARHitTestResult> hitResults = 
+					UnityARSessionNativeInterface.GetARSessionNativeInterface ().HitTest (point, resType);
+
+		if (hitResults.Count > 0) {
+			foreach (var hitResult in hitResults) {  
+				hitPos = UnityARMatrixOps.GetPosition (hitResult.worldTransform);                 
+				return true; 
+
+			}
+		}		
+		return false;
+	}
+
+	private bool getHitFromScene(out Vector3 hitPos)
+	{
+		RaycastHit hit;
+		if( Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward, out hit, 30.0f, 1 << 8))
+		{
+			hitPos = hit.point;
+			return true;
+		}     
+		hitPos = Vector3.zero;
+		return false;
+	}
+
+
+	private bool isAllInsideSphere(Vector3 point, float radius, List<Transform> pois)
+	{
+		foreach(var poi in pois)
+		{
+			if( sqrDist(poi.position, point ) > Mathf.Pow(radius, 2) )
+				return false;
+			instanceSpheres.Add( Instantiate(debugSpheres, poi.position, Quaternion.identity) );
+		}
+		return true;
 	}
 
 	private float sqrDist(Vector3 a, Vector3 b)

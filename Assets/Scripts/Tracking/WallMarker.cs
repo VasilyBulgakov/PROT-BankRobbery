@@ -81,7 +81,7 @@ namespace Tracking
 				if (update != null ) 
 				{
 					update (this);
-					if (Marker!=null) 
+					if (_myMarker!=null) 
                     {                        
 						_myMarker.transform.SetPositionAndRotation(AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation);
 						StartCoroutine (HideMarker ());

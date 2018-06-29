@@ -72,15 +72,6 @@ namespace Tracking
 
         private void Update() 
         {
-            if(Input.touchCount > 0)
-            {          
-
-                //anim.SetBool("Visible", true);
-            }
-            else
-            {
-                //anim.SetBool("Visible", false);
-            }  
             
         }
         private void OnGUI() {
