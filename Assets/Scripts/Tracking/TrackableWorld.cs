@@ -51,6 +51,15 @@ namespace Tracking
                 //player.SetCorrection(-Center.position, Quaternion.Inverse(Center.rotation));
             }
         }
+        private void Update() {
+            if(Input.touchCount > 0)
+            {
+                GetComponent<Animation>()["customBloc_Appear"].speed = 0.1f;
+                GetComponent<Animation>().Play();
+            }
+            else
+                GetComponent<Animation>().Stop();
+        }
 
         private void OnDrawGizmos()
         {

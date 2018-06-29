@@ -22,8 +22,7 @@ namespace Tracking {
 				Debug.Log("AnchorStage must be specified");
 				return;
 			}
-			//Stage.SetActive(false);
-            GetComponent<Renderer>().enabled = false;
+			Stage.SetActive(false);
 
             foreach (var marker in TrackableWorld.Anchors)
             {
@@ -87,12 +86,8 @@ namespace Tracking {
             TrackableWorld.CorrectWithAnchor(marker);
             _mainAnchor = marker;
             // }
-            //Stage.SetActive(true);
-            GetComponent<Renderer>().enabled = true;
-            Debug.Log("Appear Animation");
-            var a =  GetComponent<Animation>();
-            a["customBloc_Appear"].speed = 0.1f;
-            a.Play();            
+            Stage.SetActive(true);
+       
         }
 
         private void OnMarkerUpdate(WallMarker marker)
