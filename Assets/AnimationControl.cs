@@ -8,6 +8,7 @@ public class AnimationControl : MonoBehaviour {
 		Debug.Log("Appear Animation");
 		var a =  GetComponent<Animation>();
 		a["customBloc_Appear"].speed = 0.1f;
+		a["customBloc_Disappear"].speed = 1f;
 		a.Play();
 	}
 }
