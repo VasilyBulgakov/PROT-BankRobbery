@@ -26,10 +26,13 @@ namespace Tracking
         public Transform AR_DetectedAnchorPos;
 
         public GameObject Marker;
-
+        /// <summary>
+        /// AR_DetectedAnchorPos - TargetAnchorPosition
+        /// </summary>
+        /// <returns></returns>
         public Vector3 deltaScenePos2RealPos{
             get{
-                return delta;
+                return AR_DetectedAnchorPos.position - TargetAnchor.position;
             }
         }
 
@@ -55,8 +58,7 @@ namespace Tracking
 				AR_DetectedAnchorPos.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
 				AR_DetectedAnchorPos.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
 
-                delta = AR_DetectedAnchorPos.position - TargetAnchor.position;
-
+                
 				if (Marker!=null)
                 {                    
                     _myMarker = Instantiate(Marker, AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation);                   
@@ -76,8 +78,7 @@ namespace Tracking
 
                 AR_DetectedAnchorPos.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
                 AR_DetectedAnchorPos.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
-                delta = AR_DetectedAnchorPos.position - TargetAnchor.position;
-
+                
 				if (update != null ) 
 				{
 					update (this);
