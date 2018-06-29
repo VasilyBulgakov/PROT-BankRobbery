@@ -6,7 +6,8 @@ public class AnimationControl : MonoBehaviour {
 
 	private void OnEnable() {
 		Debug.Log("Appear Animation");
-			
-		 GetComponent<Animation>().Play();
+		var a =  GetComponent<Animation>();
+		a["customBloc_Appear"].speed = 0.1f;
+		a.Play();
 	}
 }

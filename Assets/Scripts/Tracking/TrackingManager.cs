@@ -104,6 +104,10 @@ namespace Tracking {
                     // make another anchor main
                     _mainAnchor = _currentAnchors[_currentAnchors.Count - 1];
                 }
+                else
+                {
+                    Stage.SetActive(false);
+                }
             }
         }
     /*    #region correct world anchor
