@@ -18,13 +18,7 @@ namespace Tracking
         private void Start()
         {
             anim = GetComponent<Animator>();
-            
-            offsets = new Vector3[Anchors.Length];
-            int i = 0;
-            foreach(var anc in Anchors)
-            {
-                //offsets[i] = Anchors[i++] - ce
-            }
+
             GUI.enabled = true; 
         }
         private void FixedUpdate() {
@@ -51,13 +45,10 @@ namespace Tracking
                 var stageAnchor = marker.TargetAnchor;
                 stageAnchor.SetParent(transform.parent);
                 transform.SetParent(stageAnchor);
-               
-                var detectedPos = marker.AR_DetectedAnchorPos;
-                //Vector3 deltaPos = detectedPos.position - stageAnchor.position;
-                
+
                 //move anchor to posion ddetected in AR, hence moving whole stage with it  
-                stageAnchor.position += marker.deltaScenePos2RealPos;
-                stageAnchor.rotation = detectedPos.rotation;
+                stageAnchor.position += calcDeltaUsingAllAnchors(marker);
+                stageAnchor.rotation = marker.AR_DetectedAnchorPos.rotation;
                 
                 //stageAnchor.SetPositionAndRotation(detectedPos.position, detectedPos.rotation);
                 //revert back
@@ -70,7 +61,17 @@ namespace Tracking
 				Debug.Log (Center.rotation);
             }
         }
-        private void Update() {
+
+        private Vector3 calcDeltaUsingAllAnchors(WallMarker marker)
+        {
+            //TODO: implement           
+            
+            return marker.deltaScenePos2RealPos;
+        }
+
+
+        private void Update() 
+        {
             if(Input.touchCount > 0)
             {          
 
@@ -81,8 +82,10 @@ namespace Tracking
                 //anim.SetBool("Visible", false);
             }  
             
-            }
+        }
         private void OnGUI() {
+            var style = new GUIStyle();
+            style.fontSize = 14;
             GUI.Box(new Rect(0,0, Screen.width, 40), "delta1: " + Anchors[0].deltaScenePos2RealPos.magnitude);
             GUI.Box(new Rect(0,100, Screen.width, 40), "delta2: " + Anchors[1].deltaScenePos2RealPos.magnitude);          
         

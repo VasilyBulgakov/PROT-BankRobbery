@@ -57,7 +57,6 @@ namespace Tracking
             {
 				AR_DetectedAnchorPos.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
 				AR_DetectedAnchorPos.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
-
                 
 				if (Marker!=null)
                 {                    
@@ -82,9 +81,10 @@ namespace Tracking
 				if (update != null ) 
 				{
 					update (this);
-					if (Marker!=null) {                        
+					if (Marker!=null) 
+                    {                        
 						_myMarker.transform.SetPositionAndRotation(AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation);
-						//StartCoroutine (HideMarker ());
+						StartCoroutine (HideMarker ());
 					}
 
 				}
