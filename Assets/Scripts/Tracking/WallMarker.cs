@@ -23,9 +23,17 @@ namespace Tracking
         public Transform TargetAnchor;
 
         [HideInInspector]
-        public Transform Anchor;
+        public Transform AR_DetectedAnchorPos;
 
         public GameObject Marker;
+
+        public Vector3 deltaScenePos2RealPos{
+            get{
+                return delta;
+            }
+        }
+
+        private Vector3 delta;
 
         private GameObject _myMarker;  
 
@@ -36,7 +44,7 @@ namespace Tracking
             UnityARSessionNativeInterface.ARImageAnchorUpdatedEvent += UpdateImageAnchor;
             UnityARSessionNativeInterface.ARImageAnchorRemovedEvent += RemoveImageAnchor;
             Debug.Log("image anchor events added");
-            Anchor = transform;
+            AR_DetectedAnchorPos = transform;
         }
 
         void AddImageAnchor(ARImageAnchor arImageAnchor)
@@ -44,13 +52,14 @@ namespace Tracking
             Debug.Log("image anchor added");
             if (arImageAnchor.referenceImageName == referenceImage.imageName)
             {
-				Anchor.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
-				Anchor.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
+				AR_DetectedAnchorPos.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
+				AR_DetectedAnchorPos.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
 
-                 Debug.Log("ROT: x:" + Anchor.eulerAngles.x + "y:" + Anchor.eulerAngles.y + "x:" + Anchor.eulerAngles.z);
+                delta = AR_DetectedAnchorPos.position - TargetAnchor.position;
+
 				if (Marker!=null)
                 {                    
-                    _myMarker = Instantiate(Marker, Anchor.position, Anchor.rotation);                   
+                    _myMarker = Instantiate(Marker, AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation);                   
                 }
                 if (detected != null)
 					detected(this);
@@ -65,14 +74,15 @@ namespace Tracking
             {
 				_lastTimeUpdate = Time.time;
 
-                Anchor.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
-                Anchor.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
+                AR_DetectedAnchorPos.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
+                AR_DetectedAnchorPos.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
+                delta = AR_DetectedAnchorPos.position - TargetAnchor.position;
 
 				if (update != null ) 
 				{
 					update (this);
 					if (Marker!=null) {                        
-						_myMarker.transform.SetPositionAndRotation(Anchor.position, Anchor.rotation);
+						_myMarker.transform.SetPositionAndRotation(AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation);
 						//StartCoroutine (HideMarker ());
 					}
 

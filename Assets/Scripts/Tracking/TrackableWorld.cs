@@ -11,11 +11,21 @@ namespace Tracking
 
         public WallMarker[] Anchors;
 
+        private Vector3[] offsets;
+
         public Animator anim;
 
         private void Start()
         {
             anim = GetComponent<Animator>();
+            
+            offsets = new Vector3[Anchors.Length];
+            int i = 0;
+            foreach(var anc in Anchors)
+            {
+                //offsets[i] = Anchors[i++] - ce
+            }
+
         }
         private void FixedUpdate() {
            #if UNITY_EDITOR 
@@ -29,40 +39,48 @@ namespace Tracking
         public void CorrectWithAnchor(WallMarker marker)
         {
 			Debug.Log ("CorrectWithAnchor");
-			Debug.Log (marker.Anchor);
+			Debug.Log (marker.AR_DetectedAnchorPos);
             if (marker != null)
-            {
-
-                var targetAnchor = marker.Anchor;
+            {                
+                /*
+                stage               stage                        stage
+                    scene       ->      anchor      -> move ->      scene
+                        anchor              scene                      anchor
+                 */
+                //set stage as child of ancchor
                 var stageAnchor = marker.TargetAnchor;
                 stageAnchor.SetParent(transform.parent);
                 transform.SetParent(stageAnchor);
-
-                stageAnchor.SetPositionAndRotation(targetAnchor.position, targetAnchor.rotation);
-
+               
+                var detectedPos = marker.AR_DetectedAnchorPos;
+                //Vector3 deltaPos = detectedPos.position - stageAnchor.position;
+                
+                //move anchor to posion ddetected in AR, hence moving whole stage with it  
+                stageAnchor.position += marker.deltaScenePos2RealPos;
+                stageAnchor.rotation = detectedPos.rotation;
+                
+                //stageAnchor.SetPositionAndRotation(detectedPos.position, detectedPos.rotation);
+                //revert back
                 transform.SetParent(stageAnchor.parent);
                 stageAnchor.SetParent(transform);
+                
+                //find delta               
 
 				Debug.Log (Center.position);
 				Debug.Log (Center.rotation);
-
-                //
-                //var player = FindObjectOfType<Controller>();
-
-                // var corrPos = transform.InverseTransformPoint()
-                //player.SetCorrection(-Center.position, Quaternion.Inverse(Center.rotation));
             }
         }
         private void Update() {
             if(Input.touchCount > 0)
             {
-                anim.SetBool("Visible", true);
+                
+
+                //anim.SetBool("Visible", true);
             }
             else
             {
-                anim.SetBool("Visible", false);
-            }
-               
+                //anim.SetBool("Visible", false);
+            }               
         }
 
         private void OnDrawGizmos()

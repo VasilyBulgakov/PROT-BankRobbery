@@ -32,8 +32,6 @@ namespace Tracking {
             }
 
 			FindObjectOfType<PositioningBehaviour>().planeFound += OnPlaneFound;
-           // _unityARAnchorManager = new UnityARAnchorManager();
-            //			UnityARSessionNativeInterface.ARAnchorAddedEvent += OnPlaneFound;
         }
 
         //private UnityARAnchorManager _unityARAnchorManager;
@@ -55,9 +53,9 @@ namespace Tracking {
         private void OnPlaneFound(GameObject anchor)
         {
             Debug.Log("FOUND PLANE!!");
-            Stage.transform.parent = anchor.transform;
-            Stage.transform.localPosition = Vector3.zero;
-            Stage.transform.localRotation = Quaternion.identity;
+            // Stage.transform.parent = anchor.transform;
+            // Stage.transform.localPosition = Vector3.zero;
+            // Stage.transform.localRotation = Quaternion.identity;
         }
 
         /*public void StartLocalization()
