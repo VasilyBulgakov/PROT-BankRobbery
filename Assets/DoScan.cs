@@ -48,7 +48,7 @@ public class DoScan : MonoBehaviour {
 	{
 
 		Vector3 hit;
-		if( !getHitFromARkit(out hit) )
+		if( !getHitFromScene(out hit) && !getHitFromARkit(out hit) )
 		{
 			Destroy(instanceSphere);
 			foreach(var s in instanceSpheres)
@@ -92,6 +92,7 @@ public class DoScan : MonoBehaviour {
 		ARPoint point = new ARPoint { x = screenPosition.x, y = screenPosition.y };
 
 		var resType = ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent;
+		
 		List<ARHitTestResult> hitResults = 
 					UnityARSessionNativeInterface.GetARSessionNativeInterface ().HitTest (point, resType);
 
