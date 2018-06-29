@@ -99,7 +99,6 @@ public class DoScan : MonoBehaviour {
 			foreach (var hitResult in hitResults) {  
 				hitPos = UnityARMatrixOps.GetPosition (hitResult.worldTransform);                 
 				return true; 
-
 			}
 		}		
 		return false;

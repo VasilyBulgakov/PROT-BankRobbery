@@ -6,6 +6,9 @@ public class AnimationControl : MonoBehaviour {
 
 	public DoScan eventSource;
 
+	public Material normal;
+	public Material scanned;
+
 	public float timeout = 4.0f;
 
 	float timeLeft;
@@ -23,11 +26,13 @@ public class AnimationControl : MonoBehaviour {
 	}
 
 	private void enable() {
-		GetComponent<Animator>().SetBool("Visible", true);
+		//GetComponent<Animator>().SetBool("Visible", true);
+		GetComponent<Renderer>().material = scanned;
 		timeLeft = timeout;
 	}
 	private void disable() {
-		GetComponent<Animator>().SetBool("Visible", false);
+		//GetComponent<Animator>().SetBool("Visible", false);
+		GetComponent<Renderer>().material = normal;
 	}
 	private void Update() {		
 		if(timeLeft < 0)

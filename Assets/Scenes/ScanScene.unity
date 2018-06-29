@@ -1070,22 +1070,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventSource: {fileID: 1549470841}
+  normal: {fileID: 2100000, guid: 22239467a9a80cc4d93d585a6d1554c3, type: 2}
+  scanned: {fileID: 2100000, guid: a077c66af269ecf4cb59067c8c33bae4, type: 2}
   timeout: 4
---- !u!95 &2130789464
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2130789460}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ddf9e36e64777cb48a1999c1458fbc18, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
