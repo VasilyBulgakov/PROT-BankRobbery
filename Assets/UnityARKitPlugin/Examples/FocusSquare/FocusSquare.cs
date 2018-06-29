@@ -77,8 +77,8 @@ public class FocusSquare : MonoBehaviour {
 			return;
 		}
 
-
 		#else
+
 		var screenPosition = Camera.main.ScreenToViewportPoint(center);
 		ARPoint point = new ARPoint {
 			x = screenPosition.x,

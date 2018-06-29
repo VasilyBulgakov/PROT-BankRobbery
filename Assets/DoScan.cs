@@ -48,7 +48,7 @@ public class DoScan : MonoBehaviour {
 	{
 
 		Vector3 hit;
-		if( !getHitFromScene(out hit) && !getHitFromARkit(out hit))
+		if( !getHitFromARkit(out hit) )
 		{
 			Destroy(instanceSphere);
 			foreach(var s in instanceSpheres)
@@ -88,7 +88,7 @@ public class DoScan : MonoBehaviour {
 	private bool getHitFromARkit(out Vector3 hitPos)
 	{
 		hitPos = Vector3.zero;
-		var screenPosition = Camera.main.ScreenToViewportPoint(new Vector3(Screen.width/2, Screen.height/2));
+		var screenPosition = Camera.main.ScreenToViewportPoint( new Vector3(Screen.width/2, Screen.height/2, 0.5f) );
 		ARPoint point = new ARPoint { x = screenPosition.x, y = screenPosition.y };
 
 		var resType = ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent;
