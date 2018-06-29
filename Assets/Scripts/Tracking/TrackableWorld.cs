@@ -72,15 +72,15 @@ namespace Tracking
         }
         private void Update() {
             if(Input.touchCount > 0)
-            {
-                
+            {          
 
                 //anim.SetBool("Visible", true);
             }
             else
             {
                 //anim.SetBool("Visible", false);
-            }               
+            }   
+            GUI.Box(new Rect(0,0, Screen.width, Screen.width / 4), "gui" + Anchors[0].deltaScenePos2RealPos);            
         }
 
         private void OnDrawGizmos()
