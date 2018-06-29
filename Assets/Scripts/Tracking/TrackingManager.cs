@@ -22,7 +22,6 @@ namespace Tracking {
 				Debug.Log("AnchorStage must be specified");
 				return;
 			}
-			//Stage.SetActive(false);
 
             foreach (var marker in TrackableWorld.Anchors)
             {
@@ -31,7 +30,6 @@ namespace Tracking {
                 marker.update += OnMarkerUpdate;
                 marker.detectionLost += OnMarkerLost;
             }
-            //FloorMarker.SetActive(false);
 
 			FindObjectOfType<PositioningBehaviour>().planeFound += OnPlaneFound;
            // _unityARAnchorManager = new UnityARAnchorManager();
@@ -60,7 +58,6 @@ namespace Tracking {
             Stage.transform.parent = anchor.transform;
             Stage.transform.localPosition = Vector3.zero;
             Stage.transform.localRotation = Quaternion.identity;
-            Stage.SetActive(true);
         }
 
         /*public void StartLocalization()
@@ -86,8 +83,6 @@ namespace Tracking {
             TrackableWorld.CorrectWithAnchor(marker);
             _mainAnchor = marker;
             // }
-            Stage.SetActive(true);
-       
         }
 
         private void OnMarkerUpdate(WallMarker marker)
