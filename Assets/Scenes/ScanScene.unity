@@ -796,8 +796,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1449693811}
-  - component: {fileID: 1449693813}
-  - component: {fileID: 1449693812}
   m_Layer: 0
   m_Name: Stairs
   m_TagString: Untagged
@@ -820,33 +818,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &1449693812
-Animation:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1449693810}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 65ec09072f076d84391ebe1e26d5eca6, type: 2}
-  - {fileID: 7400000, guid: 715fd3e3b8162c048911f71e6c642ae9, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!114 &1449693813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1449693810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a90587503aee345a3981c6b51a66ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1485423311
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +935,7 @@ GameObject:
   - component: {fileID: 1613256099}
   - component: {fileID: 1613256096}
   - component: {fileID: 1613256098}
+  - component: {fileID: 1613256101}
   m_Layer: 0
   m_Name: TrackabaleWorld
   m_TagString: Untagged
@@ -1058,6 +1030,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!111 &1613256101
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1613256095}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 65ec09072f076d84391ebe1e26d5eca6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &1759340703
 Prefab:
   m_ObjectHideFlags: 0
