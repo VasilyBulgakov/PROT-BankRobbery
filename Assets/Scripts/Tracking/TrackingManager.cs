@@ -22,7 +22,7 @@ namespace Tracking {
 				Debug.Log("AnchorStage must be specified");
 				return;
 			}
-			Stage.SetActive(true);
+			Stage.SetActive(false);
 
             foreach (var marker in TrackableWorld.Anchors)
             {
@@ -86,6 +86,7 @@ namespace Tracking {
             TrackableWorld.CorrectWithAnchor(marker);
             _mainAnchor = marker;
             // }
+            Stage.SetActive(true);
         }
 
         private void OnMarkerUpdate(WallMarker marker)
