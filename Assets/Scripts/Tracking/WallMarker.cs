@@ -50,8 +50,7 @@ namespace Tracking
                  Debug.Log("ROT: x:" + Anchor.eulerAngles.x + "y:" + Anchor.eulerAngles.y + "x:" + Anchor.eulerAngles.z);
 				if (Marker!=null)
                 {                    
-                    _myMarker = Instantiate(Marker, Anchor.position, Anchor.rotation);
-                    _myMarker.transform.Rotate(90,0,0);
+                    _myMarker = Instantiate(Marker, Anchor.position, Anchor.rotation);                   
                 }
                 if (detected != null)
 					detected(this);
@@ -72,8 +71,7 @@ namespace Tracking
 				if (update != null ) 
 				{
 					update (this);
-					if (Marker!=null) {
-                        _myMarker.transform.Rotate(90,0,0);
+					if (Marker!=null) {                        
 						_myMarker.transform.SetPositionAndRotation(Anchor.position, Anchor.rotation);
 						//StartCoroutine (HideMarker ());
 					}
