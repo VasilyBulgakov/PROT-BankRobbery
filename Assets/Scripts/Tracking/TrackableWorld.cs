@@ -11,9 +11,11 @@ namespace Tracking
 
         public WallMarker[] Anchors;
 
+        public Animator anim;
 
         private void Start()
         {
+            anim = GetComponent<Animator>();
         }
         private void FixedUpdate() {
            #if UNITY_EDITOR 
@@ -54,11 +56,13 @@ namespace Tracking
         private void Update() {
             if(Input.touchCount > 0)
             {
-                GetComponent<Animation>()["customBloc_Appear"].speed = 0.1f;
-                GetComponent<Animation>().Play();
+                anim.SetBool("Visible", true);
             }
             else
-                GetComponent<Animation>().Stop();
+            {
+                anim.SetBool("Visible", false);
+            }
+               
         }
 
         private void OnDrawGizmos()
