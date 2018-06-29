@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23753746742192518}
   - component: {fileID: 135299462689751776}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: SphereNotOpaque
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 1550914099157014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.7886643, y: -1.0075777, z: -0.17511338}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,7 +57,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: ea54fe13c9dd68641accafa4bad22043, type: 2}
+  - {fileID: 2100000, guid: 22239467a9a80cc4d93d585a6d1554c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

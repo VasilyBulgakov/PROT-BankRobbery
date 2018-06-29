@@ -197,7 +197,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 11818609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.721, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1005,6 +1005,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1449693810}
   debugSphere: {fileID: 1550914099157014, guid: 7ce0247e08aaa2e4b8de5ff420a14aa4,
+    type: 2}
+  debugSpheres: {fileID: 1550914099157014, guid: a514985277e3722488c3d3daa772129b,
     type: 2}
   scanPOIs: []
 --- !u!4 &1549470842
