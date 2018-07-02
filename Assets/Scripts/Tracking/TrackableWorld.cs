@@ -19,7 +19,7 @@ namespace Tracking
         {
             anim = GetComponent<Animator>();
 
-            GUI.enabled = true; 
+            
         }
         private void FixedUpdate() {
            #if UNITY_EDITOR 
@@ -75,10 +75,10 @@ namespace Tracking
             
         }
         private void OnGUI() {
-            var style = new GUIStyle();
-            style.fontSize = 14;
-            GUI.Box(new Rect(0,0, Screen.width, 40), "delta1: " + Anchors[0].deltaScenePos2RealPos.magnitude);
-            GUI.Box(new Rect(0,100, Screen.width, 40), "delta2: " + Anchors[1].deltaScenePos2RealPos.magnitude);          
+            // var style = new GUIStyle();
+            // style.fontSize = 14;
+            // GUI.Box(new Rect(0,0, Screen.width, 40), "delta1: " + Anchors[0].deltaScenePos2RealPos.magnitude);
+            // GUI.Box(new Rect(0,100, Screen.width, 40), "delta2: " + Anchors[1].deltaScenePos2RealPos.magnitude);          
         
         }
 

@@ -8,6 +8,7 @@ public class DoScan : MonoBehaviour {
 	public delegate void OnAllScanned(GameObject POI_Parent);
 	public static OnAllScanned scannedAllPOIs;
 
+	public bool debug = false;
 	public GameObject target;
 	public float radius = 2f;
 
@@ -47,28 +48,34 @@ public class DoScan : MonoBehaviour {
 		if( !getHitFromScene(screenPos, out hit))
 		{
 			if( !getHitFromARkit(screenPos, out hit) )
-			{
-				Destroy(instanceSphere);
-				foreach(var s in instanceSpheres)
-					Destroy(s);
+			{		
+				if(debug)		
+				{
+					Destroy(instanceSphere);
+					foreach(var s in instanceSpheres)
+						Destroy(s);
+				}
+
+				return;
 			}
 		}     
-
-		Debug.DrawLine(Camera.main.transform.position, hit,  Color.red, 1);
-		
-		if(instanceSphere == null)
-		{			
-			instanceSphere = GameObject.Instantiate(debugSphere, hit, Quaternion.identity);
-		}		
-		else
-			instanceSphere.transform.position = hit;
-		
-		instanceSphere.transform.localScale = new Vector3(radius*2, radius*2, radius*2);
-
-		foreach(var s in instanceSpheres)
-		{
-			Destroy(s);
+		if(debug)
+		{				
+			Debug.DrawLine(Camera.main.transform.position, hit,  Color.red, 1);
+			
+			if(instanceSphere == null)
+			{			
+				instanceSphere = GameObject.Instantiate(debugSphere, hit, Quaternion.identity);
+			}		
+			else
+				instanceSphere.transform.position = hit;		
+			instanceSphere.transform.localScale = new Vector3(radius*2, radius*2, radius*2);
+			foreach(var s in instanceSpheres)
+			{
+				Destroy(s);
+			}
 		}
+
 
 		if( isAllInsideSphere(hit, radius, scanPOIs) )
 		{
@@ -116,7 +123,8 @@ public class DoScan : MonoBehaviour {
 		{
 			if( sqrDist(poi.position, point ) > Mathf.Pow(radius, 2) )
 				return false;
-			instanceSpheres.Add( Instantiate(debugSpheres, poi.position, Quaternion.identity) );
+			if(debug)
+				instanceSpheres.Add( Instantiate(debugSpheres, poi.position, Quaternion.identity) );
 		}
 		return true;
 	}
