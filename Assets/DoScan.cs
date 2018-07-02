@@ -89,17 +89,31 @@ public class DoScan : MonoBehaviour {
 		var screenPosition = Camera.main.ScreenToViewportPoint( screenPos );
 		ARPoint point = new ARPoint { x = screenPosition.x, y = screenPosition.y };
 
-		var resType = ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent;
 		
-		List<ARHitTestResult> hitResults = 
-					UnityARSessionNativeInterface.GetARSessionNativeInterface ().HitTest (point, resType);
+		ARHitTestResultType[] resultTypes = {
+			//ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingGeometry,
+			ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent, 
+			// if you want to use infinite planes use this:
+			//ARHitTestResultType.ARHitTestResultTypeExistingPlane,
+			ARHitTestResultType.ARHitTestResultTypeEstimatedHorizontalPlane, 
+			ARHitTestResultType.ARHitTestResultTypeEstimatedVerticalPlane, 
+			ARHitTestResultType.ARHitTestResultTypeFeaturePoint
+		}; 
+		
+		
 
-		if (hitResults.Count > 0) {
-			foreach (var hitResult in hitResults) {  
-				hitPos = UnityARMatrixOps.GetPosition (hitResult.worldTransform);                 
-				return true; 
+		foreach(var type in resultTypes)
+		{
+			List<ARHitTestResult> hitResults = 
+					UnityARSessionNativeInterface.GetARSessionNativeInterface ().HitTest (point, type);
+			if (hitResults.Count > 0) {
+				foreach (var hitResult in hitResults) {  
+					hitPos = UnityARMatrixOps.GetPosition (hitResult.worldTransform);                 
+					return true; 
+				}
 			}
-		}		
+		}
+
 		return false;
 	}
 
