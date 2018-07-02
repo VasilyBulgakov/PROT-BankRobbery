@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator), typeof(MeshRenderer))]
 public class AnimationControl : MonoBehaviour {
 
 	public DoScan eventSource;
@@ -20,6 +20,7 @@ public class AnimationControl : MonoBehaviour {
 	public float curScanTime = 0;
 	public float lastScanTime = 0;
 
+	MeshRenderer renderer;
 	
 
 	private void Start() {
@@ -29,6 +30,9 @@ public class AnimationControl : MonoBehaviour {
 		eventSource.gameObject.SetActive(false);
 
 		slider.gameObject.SetActive(false);
+
+		renderer = GetComponent<MeshRenderer>();
+		renderer.enabled = false;
 	}
 
 	private void setActive(){
@@ -56,13 +60,16 @@ public class AnimationControl : MonoBehaviour {
 	}
 
 	private void enable() {		
-		GetComponent<Animator>().SetBool("Visible", true);			
-		GetComponent<Renderer>().material = scanned;
+		GetComponent<Animator>().SetBool("Visible", true);	
+
+		renderer.material = scanned;
+		renderer.enabled = true;
 
 	}
 	private void disable() {		
 		GetComponent<Animator>().SetBool("Visible", false);
-		GetComponent<Renderer>().material = normal;			
+		renderer.material = normal;		
+		renderer.enabled = false;	
 	}
 	private void FixedUpdate() {		
 		slider.value = curScanTime/scanTimeThreshold;
