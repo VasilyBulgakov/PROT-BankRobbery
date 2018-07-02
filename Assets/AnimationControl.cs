@@ -65,6 +65,7 @@ public class AnimationControl : MonoBehaviour {
 		renderer.material = scanned;
 		renderer.enabled = true;
 
+	
 	}
 	private void disable() {		
 		GetComponent<Animator>().SetBool("Visible", false);
