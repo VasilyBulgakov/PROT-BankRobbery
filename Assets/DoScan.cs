@@ -33,28 +33,11 @@ public class DoScan : MonoBehaviour {
 		instanceSpheres = new List<GameObject>();
 	}
 
-	private void OnGUI() {
-		var s = new GUIStyle();
-		s.fontSize = 20;
-		if (GUI.Button(new Rect(10, Screen.height - 250, 150, 130), "ScanCenter", s))
-            scan(Vector3.zero);
-	}
 
 
 
 	private void FixedUpdate() {
-		if(Input.touchCount > 0)
-		{
-			var touch = Input.GetTouch(0);			
-			if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
-			{
-				scan(touch.position);
-			}
-		}
-		else
-		{
-			scan(new Vector3(Screen.width/2, Screen.height/2, 10));
-		}
+		scan(new Vector3(Screen.width/2, Screen.height/2, 0));		
 	}
 
 
@@ -86,7 +69,7 @@ public class DoScan : MonoBehaviour {
 
 		if( isAllInsideSphere(hit, radius, scanPOIs) )
 		{
-			scannedAllPOIs(target);
+			scannedAllPOIs(target);			
 		}		
 	}
 
