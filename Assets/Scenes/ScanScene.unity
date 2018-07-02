@@ -1512,7 +1512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cb5f810ce10d448a0504e587a9f2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   target: {fileID: 1449693810}
   radius: 2
   debugSphere: {fileID: 1550914099157014, guid: 7ce0247e08aaa2e4b8de5ff420a14aa4,
