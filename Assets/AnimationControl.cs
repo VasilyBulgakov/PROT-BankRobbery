@@ -56,8 +56,7 @@ public class AnimationControl : MonoBehaviour {
 	}
 
 	private void enable() {		
-		GetComponent<Animator>().SetBool("Visible", true);	
-		
+		GetComponent<Animator>().SetBool("Visible", true);			
 		GetComponent<Renderer>().material = scanned;
 
 	}

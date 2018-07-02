@@ -44,11 +44,14 @@ public class DoScan : MonoBehaviour {
 	private void scan(Vector3 screenPos)
 	{
 		Vector3 hit;
-		if( !getHitFromScene(screenPos, out hit) && !getHitFromARkit(screenPos, out hit) )
+		if( !getHitFromScene(screenPos, out hit))
 		{
-			Destroy(instanceSphere);
-			foreach(var s in instanceSpheres)
-				Destroy(s);
+			if( !getHitFromARkit(screenPos, out hit) )
+			{
+				Destroy(instanceSphere);
+				foreach(var s in instanceSpheres)
+					Destroy(s);
+			}
 		}     
 
 		Debug.DrawLine(Camera.main.transform.position, hit,  Color.red, 1);
