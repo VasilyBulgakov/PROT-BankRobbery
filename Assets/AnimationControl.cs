@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿	using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +41,7 @@ public class AnimationControl : MonoBehaviour {
 		slider.gameObject.SetActive(true);
 		eventSource.gameObject.SetActive(true);
 		
+		
 	}
 
 
@@ -65,7 +66,7 @@ public class AnimationControl : MonoBehaviour {
 		renderer.material = scanned;
 		renderer.enabled = true;
 
-	
+		GameObject.Find("GamingCanvas").SetActive(true);
 	}
 	private void disable() {		
 		GetComponent<Animator>().SetBool("Visible", false);

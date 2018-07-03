@@ -264,6 +264,10 @@ Prefab:
       propertyPath: fallChance
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1312068983185366, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
   m_IsPrefabParent: 0
