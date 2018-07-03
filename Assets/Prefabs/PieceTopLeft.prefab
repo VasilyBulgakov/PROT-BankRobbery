@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 4083451430347744}
   - component: {fileID: 65678714702774234}
   - component: {fileID: 54193691451267208}
-  - component: {fileID: 114500342864806544}
   m_Layer: 12
   m_Name: PieceTopLeft
   m_TagString: CanvasPiece
@@ -216,17 +215,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.1}
   m_Center: {x: -0.5, y: -0.5, z: 0}
---- !u!114 &114500342864806544
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1894020721112254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916561e211dab974fa149f9a9a0c1414, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114955322873414788
 MonoBehaviour:
   m_ObjectHideFlags: 1

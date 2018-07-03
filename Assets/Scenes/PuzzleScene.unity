@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 37155903}
   - component: {fileID: 37155902}
   - component: {fileID: 37155901}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ Transform:
   m_GameObject: {fileID: 37155900}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -1.15, z: -0.073}
-  m_LocalScale: {x: -6.2318, y: 1.1246538, z: 12.369026}
+  m_LocalScale: {x: -51.316166, y: 1.1246538, z: 53.238953}
   m_Children: []
   m_Father: {fileID: 1720908305}
   m_RootOrder: 1
@@ -450,6 +450,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4260102637048792, guid: e6df7dd6558d6af43a40036d63c75c90,
     type: 2}
   m_PrefabInternal: {fileID: 1460904238}
+--- !u!4 &1268077198 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4250980077604570, guid: e6df7dd6558d6af43a40036d63c75c90,
+    type: 2}
+  m_PrefabInternal: {fileID: 1460904238}
 --- !u!1001 &1460904238
 Prefab:
   m_ObjectHideFlags: 0
@@ -502,7 +507,7 @@ Prefab:
         type: 2}
       propertyPath: explosion
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1268077198}
     - target: {fileID: 65575139568232632, guid: e6df7dd6558d6af43a40036d63c75c90,
         type: 2}
       propertyPath: m_Enabled
