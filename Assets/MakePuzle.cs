@@ -64,11 +64,11 @@ public class MakePuzle : MonoBehaviour {
 				var rb = newPiece.GetComponent<Rigidbody>();	
 							
 				
-				if( Random.Range(0f, 1f) < fallChance){
+				if( Random.Range(0.01f, 1f) < fallChance){
 					fallenPieces.Add(newPiece);					
 				}
-				else
-					rb.constraints = RigidbodyConstraints.FreezeAll;				
+				
+				rb.constraints = RigidbodyConstraints.FreezeAll;				
 
 				Physics.IgnoreCollision(GetComponent<Collider>(), newPiece.GetComponent<Collider>());
 				pieces[x,y] = newPiece;
@@ -88,10 +88,13 @@ public class MakePuzle : MonoBehaviour {
 			{
 				exploded = true;
 				foreach(var p in fallenPieces)
-				{	if(explosion != null)
-						p.GetComponent<Rigidbody>().AddExplosionForce(5, explosion.position, 10, 1, ForceMode.VelocityChange);
+				{	
+					Rigidbody rb = p.GetComponent<Rigidbody>();
+					if(explosion != null)
+						rb.AddExplosionForce(5, explosion.position, 10, 1, ForceMode.VelocityChange);
 					else
-						p.GetComponent<Rigidbody>().AddForce(Vector3.forward * 5, ForceMode.VelocityChange);
+						rb.AddForce(Vector3.forward * 5, ForceMode.VelocityChange);
+					rb.constraints = RigidbodyConstraints.None;
 				}
 			}
 		}

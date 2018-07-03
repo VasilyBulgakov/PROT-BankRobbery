@@ -216,6 +216,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ClearMaterial: {fileID: 2100000, guid: f1d9352050a75486f878ab19fa578f16, type: 2}
+--- !u!1001 &26495210
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2130789461}
+    m_Modifications:
+    - target: {fileID: 4260102637048792, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.042
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260102637048792, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260102637048792, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.887
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260102637048792, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260102637048792, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260102637048792, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260102637048792, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260102637048792, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260102637048792, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 114822248004057268, guid: e6df7dd6558d6af43a40036d63c75c90,
+        type: 2}
+      propertyPath: fallChance
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &84445150
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +587,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5587c957048494a2f96db36e0995449e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &421582909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 421582910}
+  - component: {fileID: 421582911}
+  m_Layer: 8
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &421582910
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 421582909}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.143, z: -2.981}
+  m_LocalScale: {x: 11.823242, y: 1, z: 13.83195}
+  m_Children: []
+  m_Father: {fileID: 1449693811}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &421582911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 421582909}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &504610663
 Prefab:
   m_ObjectHideFlags: 0
@@ -1448,6 +1540,11 @@ MeshFilter:
 --- !u!1 &1449693810 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1700565280384938, guid: cd5eac68e71609a47bfdbe30770fb42a,
+    type: 2}
+  m_PrefabInternal: {fileID: 504610663}
+--- !u!4 &1449693811 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4956381437371270, guid: cd5eac68e71609a47bfdbe30770fb42a,
     type: 2}
   m_PrefabInternal: {fileID: 504610663}
 --- !u!1 &1485423311
