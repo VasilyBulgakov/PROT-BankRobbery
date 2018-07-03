@@ -34,6 +34,7 @@ public class MakePuzle : MonoBehaviour {
 
 	private Vector3 topLeftOffset;
 
+	public float explosionForse = 5;
 	float explosionTImeout = 1f;
 	bool exploded = false;
 	// Use this for initialization
@@ -49,7 +50,7 @@ public class MakePuzle : MonoBehaviour {
 		GetComponent<TrackableWorld>().correctEvent += onCorrection;
 
 		Physics.IgnoreLayerCollision(LayerMask.NameToLayer("CanvasPiece"), LayerMask.NameToLayer("Default"));
-		Physics.IgnoreLayerCollision(LayerMask.NameToLayer("CanvasPiece"), LayerMask.NameToLayer("CanvasPiece"));
+		//Physics.IgnoreLayerCollision(LayerMask.NameToLayer("CanvasPiece"), LayerMask.NameToLayer("CanvasPiece"));
 		
 		for(int x =0; x < cols; x++)
 		{
@@ -109,9 +110,9 @@ public class MakePuzle : MonoBehaviour {
 			Rigidbody rb = p.GetComponent<Rigidbody>();
 			rb.constraints = RigidbodyConstraints.None;
 			if(explosion != null)
-				rb.AddExplosionForce(5, explosion.position, 10, 1, ForceMode.VelocityChange);
+				rb.AddExplosionForce(explosionForse, explosion.position, 10, 1, ForceMode.VelocityChange);
 			else
-				rb.AddForce(Vector3.forward * 5, ForceMode.VelocityChange);					
+				rb.AddForce(Vector3.forward * explosionForse, ForceMode.VelocityChange);					
 		}
 	}
 

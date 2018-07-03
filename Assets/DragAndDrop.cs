@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+using Tracking;
 public class DragAndDrop : MonoBehaviour {
 
 	public float maxDist = 20;	
@@ -35,6 +35,7 @@ public class DragAndDrop : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+	#if UNITY_EDITOR
 		if( Input.GetMouseButton(0) )
 		{			
 			Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -43,8 +44,6 @@ public class DragAndDrop : MonoBehaviour {
 			{
 				Debug.Log("Hit: " + hit.collider.gameObject.name);
 				Debug.DrawLine(ray.origin, hit.point, Color.red, 1);
-				
-
 
 				GameObject hitObj = hit.transform.gameObject;
 				if( !picked && hitObj.tag == prefabToDrag.tag ) 
@@ -60,8 +59,20 @@ public class DragAndDrop : MonoBehaviour {
 		{
 			rotate(scroll);
 		}
-
 		placeInFrontOfCamera();
+	#else
+		if(Input.touchCount > 0)
+		{
+			Touch touch = Input.GetTouch(0);
+
+			if(touch.phase == TouchPhase.Began)
+			{
+				
+			}
+		}
+	#endif
+		
+		
 	}
 
 	private void placeInFrontOfCamera(){
@@ -69,7 +80,7 @@ public class DragAndDrop : MonoBehaviour {
 
 		Vector3 pickPlaceDir =  cam.transform.forward - cam.transform.up*0.25f;
 
-		pickedObj.transform.position = cam.transform.position + pickPlaceDir*2;
+		pickedObj.transform.position = cam.transform.position + pickPlaceDir		;
 		pickedObj.transform.rotation = dragToTarget.transform.rotation;	
 	}
 
@@ -77,11 +88,15 @@ public class DragAndDrop : MonoBehaviour {
 	{	
 		Rigidbody rbp = hitObj.GetComponent<Rigidbody>();
 		if(rbp.constraints == RigidbodyConstraints.FreezeAll) return;
-
-		pickedObj = hitObj;
+		
 		rbp.constraints = RigidbodyConstraints.FreezeAll;
 		placeInFrontOfCamera();
+
+		pickedObj = hitObj;
 		picked = true;		
+
+		Debug.Log("Picked " + pickedObj.name);
+		//Component.FindObjectOfType<WallMarker>().enabled = false;
 	}
 	private void place(GameObject hitObj, Vector3 pos)
 	{

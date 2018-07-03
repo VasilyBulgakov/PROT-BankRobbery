@@ -305,6 +305,7 @@ MonoBehaviour:
   cols: 5
   fallChance: 0.3
   explosion: {fileID: 4250980077604570}
+  autoExplode: 0
 --- !u!114 &114850962412304180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,7 +320,7 @@ MonoBehaviour:
   maxDist: 20
   rotationSensetivity: 55
   dragToTarget: {fileID: 1312068983185366}
-  prefabToDrag: {fileID: 1894020721112254, guid: e3b38f281ac5b7048a0a2088f78c62f7,
+  prefabToDrag: {fileID: 1894020721112254, guid: c98fcb667e8b5374987769ddfe98af5c,
     type: 2}
 --- !u!198 &198683197231872668
 ParticleSystem:
