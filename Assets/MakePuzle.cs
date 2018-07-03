@@ -9,9 +9,10 @@ public class MakePuzle : MonoBehaviour {
 	public static OnCompletion completedPuzzle;
 	private const string PIECE_PREFIX = "Piece"; 
 
-	public Vector3 offset = Vector3.zero;
+
 
 	public GameObject piece;
+	public Vector3 pieceOffset = Vector3.zero;
 	public int rows = 2;
 	public int cols = 2;	
 
@@ -28,24 +29,30 @@ public class MakePuzle : MonoBehaviour {
 		}
 	}
 
+	private Vector3 pieceScale;
 
+	private Vector3 topLeftOffset;
 
 	float explosionTImeout = 1f;
 	bool exploded = false;
 	// Use this for initialization
-	void Start () {
+	void Start () {		
+
 		fallenPieces = new List<GameObject>();
 		pieces  = new GameObject[rows, cols];	
 		fallChance = 0.3f;			
 		
-
+		pieceScale = new Vector3(1.0f / cols, 1.0f / rows, 2.0f  / ( cols + rows ) );
+		topLeftOffset = new Vector3(  transform.localScale.x / 2, transform.localScale.y / 2, 0);
+		
+		
 		for(int x =0; x < cols; x++)
 		{
 			for(int y =0; y < rows; y++)
 			{
 				GameObject newPiece = GameObject.Instantiate(piece, transform);
-				newPiece.transform.localPosition = offset;
-				newPiece.transform.Translate(-x,-y,0);				
+				newPiece.transform.localPosition = gridPosToLocalCoord(new Vector2Int(x,y));
+				newPiece.transform.localScale = pieceScale;
 				newPiece.name = PIECE_PREFIX + x + y;
 
 				var ctrl = newPiece.GetComponentInChildren<TexturePieceSelection>();
@@ -54,7 +61,8 @@ public class MakePuzle : MonoBehaviour {
 				ctrl.rows = rows;
 				ctrl.cols = cols;
 
-				var rb = newPiece.GetComponent<Rigidbody>();				
+				var rb = newPiece.GetComponent<Rigidbody>();	
+							
 				
 				if( Random.Range(0f, 1f) < fallChance){
 					fallenPieces.Add(newPiece);					
@@ -62,7 +70,9 @@ public class MakePuzle : MonoBehaviour {
 				else
 					rb.constraints = RigidbodyConstraints.FreezeAll;				
 
+				Physics.IgnoreCollision(GetComponent<Collider>(), newPiece.GetComponent<Collider>());
 				pieces[x,y] = newPiece;
+
 			}
 		}
 		updateCompletion();
@@ -79,9 +89,9 @@ public class MakePuzle : MonoBehaviour {
 				exploded = true;
 				foreach(var p in fallenPieces)
 				{	if(explosion != null)
-						p.GetComponent<Rigidbody>().AddExplosionForce(10, explosion.position, 10, 1, ForceMode.VelocityChange);
+						p.GetComponent<Rigidbody>().AddExplosionForce(5, explosion.position, 10, 1, ForceMode.VelocityChange);
 					else
-						p.GetComponent<Rigidbody>().AddForce(Vector3.forward * 10, ForceMode.VelocityChange);
+						p.GetComponent<Rigidbody>().AddForce(Vector3.forward * 5, ForceMode.VelocityChange);
 				}
 			}
 		}
@@ -91,7 +101,7 @@ public class MakePuzle : MonoBehaviour {
 	{
 		if( getPieceAt(gridPos) == piece )
 		{
-			piece.transform.localPosition = gridPosToCoord(gridPos);
+			piece.transform.localPosition = gridPosToLocalCoord(gridPos);
 			piece.transform.rotation = transform.rotation;
 			fallenPieces.Remove(piece);
 			updateCompletion();
@@ -100,21 +110,15 @@ public class MakePuzle : MonoBehaviour {
 		return false;
 	}
 
-	public bool match(GameObject objToMatch, int grid_x, int grid_y){
-		if(grid_x < 0 || grid_x > cols) return false;
-		if(grid_y < 0 || grid_y > rows) return false;
-
-		return (objToMatch == pieces[grid_x, grid_y]);
-	}
-
 	public Vector2Int localPosToGrid(Vector3 pos)
 	{		
-		return new Vector2Int( (int)Mathf.Floor( -pos.x),  (int)Mathf.Floor( -pos.y) );
+		return new Vector2Int( (int)Mathf.Floor( (topLeftOffset.x -pos.x) / pieceScale.x),  
+		(int)Mathf.Floor( (topLeftOffset.y -pos.y) / pieceScale.y) );
 	}
 
-	public Vector3 gridPosToCoord(Vector2Int gridXY)
+	public Vector3 gridPosToLocalCoord(Vector2Int gridXY)
 	{
-		return new Vector3(-gridXY.x, -gridXY.y, 0)  + offset;	
+		return Vector3.Scale( new Vector3(-gridXY.x, -gridXY.y, 0) + pieceOffset, pieceScale ) + topLeftOffset;	
 	}
 	public GameObject getPieceAt(Vector2Int gridXY)
 	{

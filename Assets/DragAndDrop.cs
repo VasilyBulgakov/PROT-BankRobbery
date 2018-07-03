@@ -43,14 +43,14 @@ public class DragAndDrop : MonoBehaviour {
 			{
 				Debug.Log("Hit: " + hit.collider.gameObject.name);
 				Debug.DrawLine(ray.origin, hit.point, Color.red, 1);
+				
 
 
 				GameObject hitObj = hit.transform.gameObject;
 				if( !picked && hitObj.tag == prefabToDrag.tag ) 
 					pick(hitObj);
 				else if( picked && hitObj.tag  == dragToTarget.tag )
-					place(hitObj, hit.point);
-				
+					place(hitObj, hit.point);				
 			}
 			else
 				Debug.Log("No Hit");
@@ -64,14 +64,15 @@ public class DragAndDrop : MonoBehaviour {
 
 	private void pick(GameObject hitObj)
 	{	
-		pickedObj = hitObj;
+		Rigidbody rbp = hitObj.GetComponent<Rigidbody>();
+		if(rbp.constraints == RigidbodyConstraints.FreezeAll) return;
 
-		pickedObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+		pickedObj = hitObj;
+		rbp.constraints = RigidbodyConstraints.FreezeAll;
 
 		Vector3 pickPlaceDir =  cam.transform.forward - cam.transform.up*0.25f;
 
 		pickedObj.transform.position = cam.transform.position + pickPlaceDir*2;
-
 		pickedObj.transform.rotation = dragToTarget.transform.rotation;	
 		
 		picked = true;		
