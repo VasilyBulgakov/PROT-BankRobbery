@@ -238,12 +238,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 37155900}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.276, z: -0.073}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.15, z: -0.073}
   m_LocalScale: {x: -6.2318, y: 1.1246538, z: 12.369026}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1720908305}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &114271355
 Prefab:
@@ -336,7 +336,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &450547617
 Prefab:
@@ -493,6 +493,21 @@ Prefab:
       propertyPath: m_Name
       value: GamingCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 114822248004057268, guid: e6df7dd6558d6af43a40036d63c75c90,
+        type: 2}
+      propertyPath: autoExplode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114822248004057268, guid: e6df7dd6558d6af43a40036d63c75c90,
+        type: 2}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 65575139568232632, guid: e6df7dd6558d6af43a40036d63c75c90,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6df7dd6558d6af43a40036d63c75c90, type: 2}
   m_IsPrefabParent: 0
@@ -558,6 +573,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 688843579}
+  - {fileID: 37155904}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

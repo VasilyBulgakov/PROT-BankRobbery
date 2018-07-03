@@ -7,6 +7,9 @@ namespace Tracking
 	[RequireComponent(typeof(ParentObject))]
     public class TrackableWorld : MonoBehaviour
     {
+
+        public delegate void CorrectEvent();
+        public CorrectEvent correctEvent;
         public Transform Center;
 
         public WallMarker[] Anchors;
@@ -59,7 +62,9 @@ namespace Tracking
 
 				Debug.Log (Center.position);
 				Debug.Log (Center.rotation);
+                correctEvent();
             }
+            
         }
 
         private Vector3 calcDeltaUsingAllAnchors(WallMarker marker)

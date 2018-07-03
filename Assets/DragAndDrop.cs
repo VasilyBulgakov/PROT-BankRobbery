@@ -60,6 +60,17 @@ public class DragAndDrop : MonoBehaviour {
 		{
 			rotate(scroll);
 		}
+
+		placeInFrontOfCamera();
+	}
+
+	private void placeInFrontOfCamera(){
+		if(pickedObj == null) return;
+
+		Vector3 pickPlaceDir =  cam.transform.forward - cam.transform.up*0.25f;
+
+		pickedObj.transform.position = cam.transform.position + pickPlaceDir*2;
+		pickedObj.transform.rotation = dragToTarget.transform.rotation;	
 	}
 
 	private void pick(GameObject hitObj)
@@ -69,12 +80,7 @@ public class DragAndDrop : MonoBehaviour {
 
 		pickedObj = hitObj;
 		rbp.constraints = RigidbodyConstraints.FreezeAll;
-
-		Vector3 pickPlaceDir =  cam.transform.forward - cam.transform.up*0.25f;
-
-		pickedObj.transform.position = cam.transform.position + pickPlaceDir*2;
-		pickedObj.transform.rotation = dragToTarget.transform.rotation;	
-		
+		placeInFrontOfCamera();
 		picked = true;		
 	}
 	private void place(GameObject hitObj, Vector3 pos)

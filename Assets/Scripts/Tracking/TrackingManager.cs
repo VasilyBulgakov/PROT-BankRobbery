@@ -31,7 +31,7 @@ namespace Tracking {
                 marker.detectionLost += OnMarkerLost;
             }
 
-			FindObjectOfType<PositioningBehaviour>().planeFound += OnPlaneFound;
+			//FindObjectOfType<PositioningBehaviour>().planeFound += OnPlaneFound;
         }
 
         //private UnityARAnchorManager _unityARAnchorManager;
