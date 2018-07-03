@@ -65,8 +65,7 @@ public class AnimationControl : MonoBehaviour {
 
 		renderer.material = scanned;
 		renderer.enabled = true;
-
-		GameObject.Find("GamingCanvas").SetActive(true);
+		
 	}
 	private void disable() {		
 		GetComponent<Animator>().SetBool("Visible", false);
