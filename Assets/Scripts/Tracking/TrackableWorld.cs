@@ -35,10 +35,11 @@ namespace Tracking
 
         public void CorrectWithAnchor(WallMarker marker)
         {
-			Debug.Log ("CorrectWithAnchor");
-			Debug.Log (marker.AR_DetectedAnchorPos);
+			
             if (marker != null)
-            {                
+            {     
+                Debug.Log ("CorrectWithAnchor");
+			Debug.Log (marker.AR_DetectedAnchorPos);           
                 /*
                 stage               stage                        stage
                     scene       ->      anchor      -> move ->      scene
@@ -62,7 +63,7 @@ namespace Tracking
 
 				Debug.Log (Center.position);
 				Debug.Log (Center.rotation);
-                correctEvent();
+               
             }
             
         }

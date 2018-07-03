@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 using UnityEngine.XR.iOS;
+
+[System.Serializable]
+public class AllScanned : UnityEvent {}
 public class DoScan : MonoBehaviour {
 
 	public delegate void OnAllScanned(GameObject POI_Parent);
 	public static OnAllScanned scannedAllPOIs;
+
+	public AllScanned OnScannedAll;
 
 	public bool debug = false;
 	public GameObject target;
@@ -79,7 +85,8 @@ public class DoScan : MonoBehaviour {
 
 		if( isAllInsideSphere(hit, radius, scanPOIs) )
 		{
-			scannedAllPOIs(target);			
+			scannedAllPOIs(target);	
+			OnScannedAll.Invoke();		
 		}		
 	}
 
