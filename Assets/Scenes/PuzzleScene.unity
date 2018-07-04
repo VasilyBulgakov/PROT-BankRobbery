@@ -340,6 +340,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &725152608 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1939978054864072, guid: b136872328100764e9faf5becd4dbb05,
+    type: 2}
+  m_PrefabInternal: {fileID: 1600930422}
 --- !u!1 &780952453
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +473,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 780952455}
     m_Modifications:
+    - target: {fileID: 114480791848860458, guid: b136872328100764e9faf5becd4dbb05,
+        type: 2}
+      propertyPath: OnComplete.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4554365047512058, guid: b136872328100764e9faf5becd4dbb05, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -506,6 +516,49 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1415712605550684, guid: b136872328100764e9faf5becd4dbb05, type: 2}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114480791848860458, guid: b136872328100764e9faf5becd4dbb05,
+        type: 2}
+      propertyPath: OnComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114480791848860458, guid: b136872328100764e9faf5becd4dbb05,
+        type: 2}
+      propertyPath: OnComplete.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114480791848860458, guid: b136872328100764e9faf5becd4dbb05,
+        type: 2}
+      propertyPath: OnComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 725152608}
+    - target: {fileID: 114480791848860458, guid: b136872328100764e9faf5becd4dbb05,
+        type: 2}
+      propertyPath: OnComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 114480791848860458, guid: b136872328100764e9faf5becd4dbb05,
+        type: 2}
+      propertyPath: OnComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114480791848860458, guid: b136872328100764e9faf5becd4dbb05,
+        type: 2}
+      propertyPath: OnComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939978054864072, guid: b136872328100764e9faf5becd4dbb05, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151020635335880, guid: b136872328100764e9faf5becd4dbb05, type: 2}
+      propertyPath: m_Name
+      value: GroundCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 65443188432321500, guid: b136872328100764e9faf5becd4dbb05,
+        type: 2}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -77,10 +77,15 @@ namespace Tracking
                 else {                           
                     OnCorrection.Invoke();  
                 }
-                    
+                
+                foreach(var cmp in GetComponentsInChildren<BoxCollider>())
+                {
+                    cmp.center = cmp.center + new Vector3(0,0,0.001f);
+                    cmp.center = cmp.center - new Vector3(0,0,0.001f);
+                }
 
-				Debug.Log (Center.position);
-				Debug.Log (Center.rotation);
+				// Debug.Log (Center.position);
+				// Debug.Log (Center.rotation);
                
             }
             
