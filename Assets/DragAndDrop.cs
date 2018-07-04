@@ -35,12 +35,13 @@ public class DragAndDrop : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	//#if UNITY_EDITOR
+
+	#if UNITY_EDITOR
 		if( Input.GetMouseButton(0) )
 		{			
 			Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
-			if( Physics.Raycast(ray, out hit, maxDist) )
+			if( Physics.Raycast(ray, out hit, maxDist	) )
 			{
 				Debug.Log("Hit: " + hit.collider.gameObject.name);
 				Debug.DrawLine(ray.origin, hit.point, Color.red, 1);
@@ -60,17 +61,26 @@ public class DragAndDrop : MonoBehaviour {
 			rotate(scroll);
 		}
 		placeInFrontOfCamera();
-	
-		// if(Input.touchCount > 0)
-		// {
-		// 	Touch touch = Input.GetTouch(0);
+	#else
+		if(Input.touchCount > 0)
+		{
+			Touch touch = Input.GetTouch(0);
 
-		// 	if(touch.phase == TouchPhase.Began)
-		// 	{
-				
-		// 	}
-		// }
-	
+			if(touch.phase == TouchPhase.Began)
+			{
+				Ray ray = Camera.main.ScreenPointToRay(touch.position);
+				RaycastHit hit;
+				if( Physics.Raycast(ray, out hit, maxDist) )
+				{
+					GameObject hitObj = hit.transform.gameObject;
+					if( !picked && hitObj.tag == prefabToDrag.tag ) 
+						pick(hitObj);
+					else if( picked && hitObj.tag  == dragToTarget.tag )
+						place(hitObj, hit.point);				
+				}					
+			}
+		}
+	#endif
 		
 		
 	}
@@ -123,7 +133,8 @@ public class DragAndDrop : MonoBehaviour {
 	{
 		Rigidbody rb = pickedObj.GetComponent<Rigidbody>();
 		rb.constraints = RigidbodyConstraints.None;
-		rb.MovePosition(dropPos);
+		rb.MovePosition( dropPos );	
+		
 		picked = false;
 		pickedObj = null;
 	}
