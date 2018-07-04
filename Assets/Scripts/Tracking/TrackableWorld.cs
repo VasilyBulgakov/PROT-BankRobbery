@@ -78,6 +78,7 @@ namespace Tracking
                     OnCorrection.Invoke();  
                 }
                 
+                //workaround for unity bug: not updating boxcollider position
                 foreach(var cmp in GetComponentsInChildren<BoxCollider>())
                 {
                     cmp.center = cmp.center + new Vector3(0,0,0.001f);

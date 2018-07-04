@@ -35,8 +35,7 @@ public class DragAndDrop : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-	#if UNITY_EDITOR
+	
 		if( Input.GetMouseButton(0) )
 		{			
 			Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -61,7 +60,8 @@ public class DragAndDrop : MonoBehaviour {
 			rotate(scroll);
 		}
 		placeInFrontOfCamera();
-	#else
+	
+	/*
 		if(Input.touchCount > 0)
 		{
 			Touch touch = Input.GetTouch(0);
@@ -80,7 +80,8 @@ public class DragAndDrop : MonoBehaviour {
 				}					
 			}
 		}
-	#endif
+	*/
+
 		
 		
 	}
