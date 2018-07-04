@@ -51,7 +51,7 @@ public class MakePuzle : MonoBehaviour {
 		pieceScale = new Vector3(1.0f / cols, 1.0f / rows, 2.0f  / ( cols + rows ) );
 		topLeftOffset = new Vector3(  transform.localScale.x / 2, transform.localScale.y / 2, 0);
  
-		GetComponent<TrackableWorld>().correctEvent += onCorrection;
+		
 
 		Physics.IgnoreLayerCollision(LayerMask.NameToLayer("CanvasPiece"), LayerMask.NameToLayer("Default"));
 		//Physics.IgnoreLayerCollision(LayerMask.NameToLayer("CanvasPiece"), LayerMask.NameToLayer("CanvasPiece"));
@@ -103,11 +103,6 @@ public class MakePuzle : MonoBehaviour {
 		}
 	}
 
-
-	private void onCorrection(){
-		if(exploded) return;		
-		autoExplode = true;
-	}
 	public void explode(){	
 		foreach(var p in fallenPieces)
 		{	
