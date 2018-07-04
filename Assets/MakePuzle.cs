@@ -6,7 +6,7 @@ using Tracking;
 
 public class MakePuzle : MonoBehaviour {
 
-	public UnityEvent OnComlete;
+	public UnityEvent OnComplete;
 
 	private const string PIECE_PREFIX = "Piece"; 
 
@@ -22,6 +22,7 @@ public class MakePuzle : MonoBehaviour {
 
 	public Transform explosion;
 	public bool autoExplode = false;
+
 	private GameObject[,] pieces;
 	private List<GameObject> fallenPieces;
 	private bool completed = false;
@@ -36,12 +37,14 @@ public class MakePuzle : MonoBehaviour {
 	private Vector3 topLeftOffset;
 
 	public float explosionForse = 5;
-	float explosionTImeout = 1f;
+	float explosionTImeout = 2f;
 	bool exploded = false;
+
+
 	// Use this for initialization
 	void Start () {		
-		if(OnComlete == null)
-			OnComlete = new UnityEvent();
+		if(OnComplete == null)
+			OnComplete = new UnityEvent();
 
 
 		fallenPieces = new List<GameObject>();
@@ -54,8 +57,25 @@ public class MakePuzle : MonoBehaviour {
 		
 
 		Physics.IgnoreLayerCollision(LayerMask.NameToLayer("CanvasPiece"), LayerMask.NameToLayer("Default"));
-		//Physics.IgnoreLayerCollision(LayerMask.NameToLayer("CanvasPiece"), LayerMask.NameToLayer("CanvasPiece"));
-		
+		//Physics.IgnoreLayerCollision(LayerMask.NameToLayer("CanvasPiece"), LayerMask.NameToLayer("CanvasPiece"));		
+		createPainting();
+	}	
+
+	
+	private void FixedUpdate() {
+		if( !exploded && autoExplode )
+		{			
+			if(explosionTImeout > 0)
+				explosionTImeout -= Time.fixedDeltaTime;
+			else
+			{
+				exploded = true;
+				explode();
+			}
+		}
+	}
+
+	public void createPainting(){
 		for(int x =0; x < cols; x++)
 		{
 			for(int y =0; y < rows; y++)
@@ -87,20 +107,10 @@ public class MakePuzle : MonoBehaviour {
 		}
 		updateCompletion();
 	}
-	
 
-	
-	private void FixedUpdate() {
-		if( !exploded && autoExplode )
-		{			
-			if(explosionTImeout > 0)
-				explosionTImeout -= Time.fixedDeltaTime;
-			else
-			{
-				exploded = true;
-				explode();
-			}
-		}
+	public void delayedExplosion()
+	{
+		autoExplode = true;
 	}
 
 	public void explode(){	
@@ -151,7 +161,7 @@ public class MakePuzle : MonoBehaviour {
 		else{
 			Debug.Log("DONE!");
 			completed = true;
-			OnComlete.Invoke();
+			OnComplete.Invoke();
 		}
 	}
 }
