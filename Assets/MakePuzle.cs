@@ -4,13 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using Tracking;
 
-public class PuzzleCompleteEvent : UnityEvent{}
 public class MakePuzle : MonoBehaviour {
 
-	public delegate void OnCompletion();
-	public static OnCompletion completedPuzzle;
+	public UnityEvent OnComlete;
 
-	public PuzzleCompleteEvent OnPuzzzleComplete;
 	private const string PIECE_PREFIX = "Piece"; 
 
 
@@ -43,6 +40,9 @@ public class MakePuzle : MonoBehaviour {
 	bool exploded = false;
 	// Use this for initialization
 	void Start () {		
+		if(OnComlete == null)
+			OnComlete = new UnityEvent();
+
 
 		fallenPieces = new List<GameObject>();
 		pieces  = new GameObject[rows, cols];	
@@ -151,8 +151,7 @@ public class MakePuzle : MonoBehaviour {
 		else{
 			Debug.Log("DONE!");
 			completed = true;
-			completedPuzzle();
-			OnPuzzzleComplete.Invoke();
+			OnComlete.Invoke();
 		}
 	}
 }

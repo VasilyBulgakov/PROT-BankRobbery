@@ -1,15 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 //using MultiplayerClient;
+
+
+
+
 
 namespace Tracking
 {
 	[RequireComponent(typeof(ParentObject))]
     public class TrackableWorld : MonoBehaviour
     {
+        public UnityEvent OnFirstCorrection;
+        public UnityEvent OnCorrection;
+        
+        private bool firstCorrection = true;
 
-        public delegate void CorrectEvent();
-        public CorrectEvent correctEvent;
         public Transform Center;
 
         public WallMarker[] Anchors;
@@ -21,6 +28,10 @@ namespace Tracking
         private void Start()
         {
             anim = GetComponent<Animator>();
+            if (OnCorrection == null)
+                OnCorrection = new UnityEvent();
+            if (OnFirstCorrection == null)
+                OnFirstCorrection = new UnityEvent();
 
             
         }
@@ -39,7 +50,7 @@ namespace Tracking
             if (marker != null)
             {     
                 Debug.Log ("CorrectWithAnchor");
-			Debug.Log (marker.AR_DetectedAnchorPos);           
+			    Debug.Log (marker.AR_DetectedAnchorPos);           
                 /*
                 stage               stage                        stage
                     scene       ->      anchor      -> move ->      scene
@@ -59,7 +70,14 @@ namespace Tracking
                 transform.SetParent(stageAnchor.parent);
                 stageAnchor.SetParent(transform);
                 
-                //find delta               
+                if(firstCorrection){
+                    firstCorrection = false; 
+                    OnFirstCorrection.Invoke(); 
+                }
+                else {                           
+                    OnCorrection.Invoke();  
+                }
+                    
 
 				Debug.Log (Center.position);
 				Debug.Log (Center.rotation);
