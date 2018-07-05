@@ -7,6 +7,9 @@ TagManager:
   - ScanPOI
   - CanvasPiece
   - Gamingcanvas
+  - Spike
+  - Tube
+  - Select
   layers:
   - Default
   - TransparentFX
