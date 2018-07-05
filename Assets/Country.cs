@@ -33,17 +33,12 @@ public class Country : MonoBehaviour {
 		indices.Add(1);
 		indices.Add(triangleCount+1);
 
-
-
 		mesh.SetIndices(indices.ToArray(), MeshTopology.Triangles, 0);
 		
 		GetComponent<MeshCollider>().sharedMesh = mesh;
 
-		string str = "";
-		foreach(int i in indices)
-		{
-			str =str + i + " ";
-		}
-		Debug.Log(str);		
+		// string str = "";
+		// foreach(int i in indices) str = str + i + " ";		
+		// Debug.Log(str);		
 	}
 }

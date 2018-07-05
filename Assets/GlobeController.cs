@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
 public class GlobeController : MonoBehaviour {
 	
 	public GameObject rotateTarget;	
@@ -45,7 +44,7 @@ public class GlobeController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	#if UNITY_EDITOR
 		if(Input.GetMouseButton(0))
 		{			
 			if(holding < 0) {				
@@ -73,39 +72,32 @@ public class GlobeController : MonoBehaviour {
 			holding = holdForRotateDelay;
 		}	
 		lastMousePos = Input.mousePosition;	
-	// #else
-	// 	if(Input.touchCount > 0)
-	// 	{
-	// 		Touch touch = Input.GetTouch(0);
-	// 		if(touch.phase == TouchPhase.Began)
-	// 		{
+	#else
+		if(Input.touchCount > 0)
+		{
+			Touch touch = Input.GetTouch(0);
+			if(touch.phase == TouchPhase.Began)
+			{
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hit;
 
-	// 		}
-	// 		else if(touch.phase == TouchPhase.Moved)
-	// 		{
-	// 			deltaDrag =  touch.deltaPosition;
-	// 			rotateTarget.transform.Rotate(0, deltaDrag.x * mouseSensetivity * Time.deltaTime, 0);	
-	// 		}
-	// 		else if(touch.phase ==  TouchPhase.Ended)
-	// 		{
-	// 			if(holding > 0)
-	// 			{				
-	// 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-	// 				RaycastHit hit;
-
-	// 				if(Physics.Raycast(ray, out hit, 10, 1 << 13 ))
-	// 				{					
-	// 					Debug.DrawLine(ray.origin, hit.point, Color.red, 1);
-	// 					select(hit.collider.gameObject);
-	// 				}
-	// 			}
-
-	// 			deltaDrag = Vector3.zero;
-	// 			holding = holdForRotateDelay;
-	// 		}
-	// 		lastMousePos = touch.position;	
-	// 	}
-	// #endif
+				if(Physics.Raycast(ray, out hit, 10, 1 << 13 ))
+				{					
+					Debug.DrawLine(ray.origin, hit.point, Color.red, 1);
+					select(hit.collider.gameObject);
+				}
+			}
+			else if(touch.phase == TouchPhase.Moved)
+			{				
+				rotateTarget.transform.Rotate(0, touch.deltaPosition.x * mouseSensetivity * Time.deltaTime, 0);	
+			}
+			else if(touch.phase ==  TouchPhase.Ended)
+			{
+				deltaDrag = Vector3.zero;				
+			}
+			lastMousePos = touch.position;	
+		}
+	#endif
 		
 	}
 	private void select(GameObject obj)
