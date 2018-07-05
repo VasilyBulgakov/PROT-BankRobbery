@@ -56,7 +56,7 @@ public class PlatformController : MonoBehaviour {
 
         if (Camera.main.transform.eulerAngles.y < 240 && Camera.main.transform.eulerAngles.y >= 90) sighDelta = -1;
 
-        transform.Rotate(0, 0, sighDelta * deltaAngle * rotateSpeed / 50, Space.World);
+        transform.Rotate(0, 0, sighDelta * deltaAngle * rotateSpeed / 50);
         prevAngle = Camera.main.transform.eulerAngles.z;
 #else
         {
@@ -73,6 +73,6 @@ public class PlatformController : MonoBehaviour {
             }
         }
 #endif
-
+    
 	}
 }
