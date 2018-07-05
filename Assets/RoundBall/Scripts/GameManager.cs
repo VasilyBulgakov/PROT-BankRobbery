@@ -39,7 +39,12 @@ public class GameManager : MonoBehaviour {
 		HighscoreText.text = "Score " + Score.ToString ();
         AttemptText.text = "Attempt " + Attempt.ToString();
 
-        PlatformRadius = cube.transform.position.y - transform.position.y;
+        Vector3 cubePos = cube.transform.localPosition;
+        Vector3 centerPos = transform.localPosition;
+        PlatformRadius = Mathf.Sqrt( Mathf.Pow(cubePos.x - centerPos.x, 2) + Mathf.Pow(cubePos.y - centerPos.y, 2) );
+
+        //PlatformRadius = cube.transform.position.y - transform.position.y;
+       
         //CreatePoint();
     }
 
@@ -186,13 +191,16 @@ public class GameManager : MonoBehaviour {
             sp.transform.parent = PlatformController.Instance.transform;
             float angle = Random.Range(min_delta + (max_delta - min_delta) / 2, max_delta);
             currentAngle += angle;
-            sp.transform.rotation = Quaternion.Euler(0, 0, 0 - currentAngle) * transform.rotation;
+            sp.transform.localRotation = Quaternion.Euler(0, 0, 0 - currentAngle) ; //* transform.rotation
             float rad = currentAngle * Mathf.PI / 180;
             var scale = transform.parent.localScale.y * transform.parent.parent.localScale.y;
             var localScale = new Vector3(sp.transform.localScale.x * scale, sp.transform.localScale.y * scale, sp.transform.localScale.z * scale);
             sp.transform.localScale = localScale;
-                var spikeOffset = sp.transform.localScale.y * scale * 20;
-            sp.transform.position = new Vector3((PlatformRadius - spikeOffset) * Mathf.Sin(rad), (PlatformRadius - spikeOffset) * Mathf.Cos(rad), Ball.transform.localPosition.z) + transform.position;
+                var spikeOffset = sp.transform.localScale.y * scale * 25;
+            sp.transform.localPosition = new Vector3(   (PlatformRadius - spikeOffset) * Mathf.Sin(rad), 
+                                                        (PlatformRadius - spikeOffset) * Mathf.Cos(rad), 
+                                                        Ball.transform.localPosition.z
+                                                    ) + transform.localPosition;
             //* transform.parent.localScale.y* transform.parent.localScale.y
             //sp.transform.localScale = new Vector3(sp.transform.localScale.x , sp.transform.localScale.y , sp.transform.localScale.z );
             ActiveSpikes.Add(sp);
@@ -221,8 +229,11 @@ public class GameManager : MonoBehaviour {
             sp.SendMessage("SaveScale");
             var localScale = new Vector3(sp.transform.localScale.x * scale, sp.transform.localScale.y * scale, sp.transform.localScale.z * scale);
             sp.transform.localScale = localScale;
-            var spikeOffset = sp.transform.localScale.y * scale * 20;
-			sp.transform.position = new Vector3((PlatformRadius - spikeOffset) * Mathf.Sin(angle), (PlatformRadius - spikeOffset) * Mathf.Cos(angle), Ball.transform.localPosition.z) + transform.position;
+            var spikeOffset = sp.transform.localScale.y * scale * 25    ;
+			sp.transform.localPosition = new Vector3(   (PlatformRadius - spikeOffset) * Mathf.Sin(angle), 
+                                                        (PlatformRadius - spikeOffset) * Mathf.Cos(angle), 
+                                                        Ball.transform.localPosition.z
+                                                    ) + transform.localPosition;
             //sp.transform.localScale = new Vector3(sp.transform.localScale.x * transform.parent.localScale.x, sp.transform.localScale.y * transform.parent.localScale.y, sp.transform.localScale.z * transform.parent.localScale.y);
             ActiveSpikes.Add(sp);
             sp.SendMessage("ShowSpikes");
