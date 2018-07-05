@@ -130,7 +130,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4868798250810548, guid: 18e36bb4045e8264c912c552e9581046, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.0071
       objectReference: {fileID: 0}
     - target: {fileID: 4868798250810548, guid: 18e36bb4045e8264c912c552e9581046, type: 2}
       propertyPath: m_LocalRotation.x
@@ -150,7 +150,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4868798250810548, guid: 18e36bb4045e8264c912c552e9581046, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18e36bb4045e8264c912c552e9581046, type: 2}
@@ -343,7 +343,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1952989608}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &244707010
 Prefab:
@@ -382,7 +382,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4544653885419466, guid: 1c2a0da9fedda564cb702950da99dd3f, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224146241819063068, guid: 1c2a0da9fedda564cb702950da99dd3f,
         type: 2}
@@ -398,12 +398,21 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1097290540970464, guid: 1c2a0da9fedda564cb702950da99dd3f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c2a0da9fedda564cb702950da99dd3f, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &244707011 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4544653885419466, guid: 1c2a0da9fedda564cb702950da99dd3f,
+    type: 2}
+  m_PrefabInternal: {fileID: 244707010}
+--- !u!1 &275620664 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1097290540970464, guid: 1c2a0da9fedda564cb702950da99dd3f,
     type: 2}
   m_PrefabInternal: {fileID: 244707010}
 --- !u!1 &286933080
@@ -1179,7 +1188,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnFirstCorrection:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 275620664}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnCorrection:
@@ -1201,9 +1221,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 244707011}
   - {fileID: 194676033}
   - {fileID: 42971214}
+  - {fileID: 244707011}
   m_Father: {fileID: 1173768742}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
