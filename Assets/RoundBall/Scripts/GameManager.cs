@@ -177,11 +177,11 @@ public class GameManager : MonoBehaviour {
         }
         //num_spikes is the number of spikes to be created.you can use your own algorithm.
         int num_spikes = 5 + (Score / 3);
-
+        //int num_spikes = 0;
         float currentAngle = 0;
         float max_delta = 360 / num_spikes;
         float min_delta = (360 * 0.5f) / (2 * Mathf.PI * PlatformRadius);
-
+        
         //Loop for creating spikes.
         for (int i = 0; i < num_spikes; i++)
         {
@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour {
             var scale = transform.parent.localScale.y * transform.parent.parent.localScale.y;
             var localScale = new Vector3(sp.transform.localScale.x * scale, sp.transform.localScale.y * scale, sp.transform.localScale.z * scale);
             sp.transform.localScale = localScale;
-                var spikeOffset = sp.transform.localScale.y * scale * 25;
+                var spikeOffset = sp.transform.localScale.y * scale * 40;
             sp.transform.localPosition = new Vector3(   (PlatformRadius - spikeOffset) * Mathf.Sin(rad), 
                                                         (PlatformRadius - spikeOffset) * Mathf.Cos(rad), 
                                                         Ball.transform.localPosition.z
@@ -229,7 +229,7 @@ public class GameManager : MonoBehaviour {
             sp.SendMessage("SaveScale");
             var localScale = new Vector3(sp.transform.localScale.x * scale, sp.transform.localScale.y * scale, sp.transform.localScale.z * scale);
             sp.transform.localScale = localScale;
-            var spikeOffset = sp.transform.localScale.y * scale * 25    ;
+            var spikeOffset = sp.transform.localScale.y * scale * 40    ;
 			sp.transform.localPosition = new Vector3(   (PlatformRadius - spikeOffset) * Mathf.Sin(angle), 
                                                         (PlatformRadius - spikeOffset) * Mathf.Cos(angle), 
                                                         Ball.transform.localPosition.z
