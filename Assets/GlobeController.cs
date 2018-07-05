@@ -89,7 +89,7 @@ public class GlobeController : MonoBehaviour {
 			}
 			else if(touch.phase == TouchPhase.Moved)
 			{				
-				rotateTarget.transform.Rotate(0, touch.deltaPosition.x * mouseSensetivity * Time.deltaTime, 0);	
+				rotateTarget.transform.Rotate(0, -touch.deltaPosition.x * mouseSensetivity * Time.deltaTime, 0);	
 			}
 			else if(touch.phase ==  TouchPhase.Ended)
 			{
