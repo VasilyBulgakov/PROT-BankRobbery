@@ -10,6 +10,7 @@ TagManager:
   - Spike
   - Tube
   - Select
+  - Country
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - ARKitPlane
   - Canvas
   - CanvasPiece
-  - 
+  - Country
   - 
   - 
   - 
@@ -46,4 +47,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 1
+    uniqueID: 3443296177
     locked: 0
