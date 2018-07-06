@@ -12,18 +12,21 @@ public class GameManager : MonoBehaviour {
     public GameObject cube;
     int Score = 0;
 	int Attempt = 1;
-    public Text AttemptText;
-	public Text HighscoreText;
 	bool pause=false;
+
     List<GameObject> ActiveSpikes = new List<GameObject>();
+    List<Transform> ActivePanel = new List<Transform>();
+    List<GameObject> ActiveGreenEffect = new List<GameObject>();
+
     float PlatformRadius;
     public GameObject Tube;
     public Material Select;
     public Material Unselect;
+    public Material Spike;
     public GameObject spike3d;
     public GameObject dead;
     public GameObject WallHit;
-
+    public int NumberTouches;
     string[] selectSection;
     private int colSect = 3;
     private int countAttempt = 3;
@@ -35,16 +38,7 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-		//get value of highscore and show on highscore text.
-		HighscoreText.text = "Score " + Score.ToString ();
-        AttemptText.text = "Attempt " + Attempt.ToString();
-
-        Vector3 cubePos = cube.transform.localPosition;
-        Vector3 centerPos = transform.localPosition;
-        PlatformRadius = Mathf.Sqrt( Mathf.Pow(cubePos.x - centerPos.x, 2) + Mathf.Pow(cubePos.y - centerPos.y, 2) );
-
-        //PlatformRadius = cube.transform.position.y - transform.position.y;
-       
+        PlatformRadius = cube.transform.position.y - transform.position.y;
         //CreatePoint();
     }
 
@@ -52,7 +46,8 @@ public class GameManager : MonoBehaviour {
     public void HitPoint()
     {   //Add 1 score and display it.
         Score += 1;
-        HighscoreText.text = Score.ToString();
+
+        FindObjectOfType<PlatformController>().StartFlashingLock(Score);
 
         isWin();
         //start createpoint function.
@@ -60,16 +55,23 @@ public class GameManager : MonoBehaviour {
     }
     void UnselectedSection()
     {
+        foreach(GameObject go in ActiveGreenEffect)
+        {
+            ObjectPool.Instance.PoolObject(go);
+        }
+        ActiveGreenEffect.Clear();
+
         if (selectSection != null)
         for (int i = 0; i < selectSection.Length; i++)
-        { 
-            Tube.transform.Find(selectSection[i]).GetComponent<MeshRenderer>().material = Unselect;
-            Tube.transform.Find(selectSection[i]).tag = "Tube";
+        {
+            Tube.transform.Find(selectSection[i]).Find("Forward").GetComponent<MeshRenderer>().material = Unselect;
+            //Tube.transform.Find(selectSection[i]).GetComponent<MeshRenderer>().material = Unselect;
+            Tube.transform.Find(selectSection[i]).Find("Forward").tag = "Tube";
         }
     }
     void isWin()
     {
-        if (Score == 5)
+        if (Score == NumberTouches)
         {
             StartCoroutine(WinGame());
         }
@@ -78,7 +80,8 @@ public class GameManager : MonoBehaviour {
     {
         FindObjectOfType<PlatformController>().WinGame();
         yield return new WaitForSeconds(1.5f);
-        //FindObjectOfType<SceneManagement.GameScene>().doWin();
+
+        //FindObjectOfType<SceneManagement.RBGameScene>().doWin();
     }
     public void isLose()
     {
@@ -99,7 +102,7 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(0.3f);
         FindObjectOfType<PlatformController>().FailGame();
         yield return new WaitForSeconds(1.5f);
-        //FindObjectOfType<SceneManagement.GameScene>().doFail();
+        //FindObjectOfType<SceneManagement.RBGameScene>().doFail();
     }
     public IEnumerator RestartGame()
     {
@@ -113,21 +116,14 @@ public class GameManager : MonoBehaviour {
         Score = 0;
         yield return new WaitForSeconds(0.5f);
 
-        HighscoreText.text = "Score " + Score.ToString();
-        AttemptText.text = "Attempt " + Attempt.ToString();
         yield return new WaitForSeconds(1.5f);///
         Ball.GetComponent<BallController>().Launch();
     }
+
     // This creates the Point
     void CreatePoint()
 	{
-
-        //GameObject Point = ObjectPool.Instance.GetObjectForType("point", false);
-        //Point.transform.parent = PlatformController.Instance.transform;
-        //float radius = Random.Range(0.3f, 2f);   
-        //float angle = Random.Range(0, 360);
-        //angle *= Mathf.PI / 180;
-        //Point.transform.position = new Vector3(radius * Mathf.Sin(angle), Mathf.Cos(angle));
+        DeactiveSpikes();
 
         //создадим новый сектор, в который нужно попасть мячем
 
@@ -137,19 +133,18 @@ public class GameManager : MonoBehaviour {
         int numSection = Random.Range(1, Tube.transform.childCount-(colSect-1));
         for (int i = numSection, k = 0; i < numSection + colSect; i++,k++)
         {
-            if (i <= Tube.transform.childCount)
+            selectSection[k] = "Panel" + i;
+            Transform panel = Tube.transform.Find("Panel" + i).Find("Forward");
+            panel.tag = "Select";
+            panel.GetComponent<MeshRenderer>().material = Select;
+            if (k == 1)
             {
-                selectSection[k] = "Cube" + i;
-                MeshRenderer meshRenderer = Tube.transform.Find("Cube" + i).GetComponent<MeshRenderer>();
-                Tube.transform.Find("Cube" + i).tag = "Select";
-                meshRenderer.material = Select;
-            }
-            else
-            {
-                selectSection[k] = "Cube" + i;
-                MeshRenderer meshRenderer = Tube.transform.Find("Cube" + (i - Tube.transform.childCount)).GetComponent<MeshRenderer>();
-                Tube.transform.Find("Cube" + (i - Tube.transform.childCount)).tag = "Select";
-                meshRenderer.material = Select;
+                GameObject re = ObjectPool.Instance.GetObjectForType("greenEffect", false);
+
+                re.transform.parent = PlatformController.Instance.transform;
+                re.transform.position = panel.position;
+                re.transform.rotation = panel.rotation;
+                ActiveGreenEffect.Add(re);
             }
         }
     }
@@ -160,66 +155,173 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(SpikeSession());
         //SpikeSession();
     }
-		
-    // Hides the present Spikes and brings a new one
-    //void SpikeSession()
-    IEnumerator SpikeSession()
-    {   //this hides all the active spikes.
+	private void DeactiveSpikes()
+    {
         if (ActiveSpikes.Count > 0)
         {
-            foreach (GameObject g in ActiveSpikes)
-                g.SendMessage("HideSpikes");
-                //Destroy(g);
-
+            foreach (GameObject go in ActiveSpikes)
+            {
+                go.SendMessage("HideSpikes");
+            }
             ActiveSpikes.Clear();
-
-            yield return new WaitForSeconds(0.05f);
         }
-        //num_spikes is the number of spikes to be created.you can use your own algorithm.
-        int num_spikes = 5 + (Score / 3);
-        //int num_spikes = 0;
-        float currentAngle = 0;
-        float max_delta = 360 / num_spikes;
-        float min_delta = (360 * 0.5f) / (2 * Mathf.PI * PlatformRadius);
-        
-        //Loop for creating spikes.
-        for (int i = 0; i < num_spikes; i++)
+        if (ActivePanel.Count > 0)
         {
-            //GameObject sp = Instantiate(spike3d);
-            GameObject sp = ObjectPool.Instance.GetObjectForType("spike3d", false);
-
-            sp.transform.parent = PlatformController.Instance.transform;
-            float angle = Random.Range(min_delta + (max_delta - min_delta) / 2, max_delta);
-            currentAngle += angle;
-            sp.transform.localRotation = Quaternion.Euler(0, 0, 0 - currentAngle) ; //* transform.rotation
-            float rad = currentAngle * Mathf.PI / 180;
-            var scale = transform.parent.localScale.y * transform.parent.parent.localScale.y;
-            var localScale = new Vector3(sp.transform.localScale.x * scale, sp.transform.localScale.y * scale, sp.transform.localScale.z * scale);
-            sp.transform.localScale = localScale;
-                var spikeOffset = sp.transform.localScale.y * scale * 40;
-            sp.transform.localPosition = new Vector3(   (PlatformRadius - spikeOffset) * Mathf.Sin(rad), 
-                                                        (PlatformRadius - spikeOffset) * Mathf.Cos(rad), 
-                                                        Ball.transform.localPosition.z
-                                                    ) + transform.localPosition;
-            //* transform.parent.localScale.y* transform.parent.localScale.y
-            //sp.transform.localScale = new Vector3(sp.transform.localScale.x , sp.transform.localScale.y , sp.transform.localScale.z );
-            ActiveSpikes.Add(sp);
-            sp.SendMessage("ShowSpikes");
+            foreach (Transform tr in ActivePanel)
+            {
+                tr.tag = "Tube";
+                tr.GetComponent<MeshRenderer>().material = Unselect;
+            }
+            ActivePanel.Clear();
         }
     }
+    private bool NewWarningPanel(int numPanel)
+    {
+        Transform panel = Tube.transform.Find("Panel" + numPanel).Find("Forward");
+        if (panel.tag != "Select" && panel.tag != "Spike")
+        {
+            panel.tag = "Spike";
+            MeshRenderer meshRenderer = panel.GetComponent<MeshRenderer>();
+            meshRenderer.material = Spike;
+            ActivePanel.Add(panel);
+            GameObject sp = ObjectPool.Instance.GetObjectForType("redEffect", false);
 
+            sp.transform.parent = PlatformController.Instance.transform;
+            sp.transform.position = panel.position;
+            sp.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            sp.transform.rotation = panel.rotation;
+            sp.SendMessage("ShowSpikes");
+            ActiveSpikes.Add(sp);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }      
+    }
+
+    // Hides the present Spikes and brings a new one
+    private IEnumerator SpikeSession()
+    {  
+        //this hides all the active spikes.
+        DeactiveSpikes();
+        
+        int num_spikes = 5 + (Score / 3);
+        int numFirstSection = 0;
+        int countPanel = Tube.transform.childCount;
+
+        while(true)
+        {
+            numFirstSection = Random.Range(1, countPanel + 1);
+            if (NewWarningPanel(numFirstSection))
+            {
+                yield return null;
+                break;
+            }
+        }
+
+        int step = countPanel / num_spikes;
+
+        for (int i = 1; i < num_spikes;)
+        {
+            Debug.Log((numFirstSection + (step * i) - (int)(step / 2)).ToString() + " " + (numFirstSection + (step * i) + (int)(step / 2) - ((step % 2 == 0 && step > 4) ? 1 : 0) - 1).ToString());
+                                                                                                                       //classify = (input > 0) ? "positive" : "negative";  
+            int numCurrentSection = Random.Range(numFirstSection + (step * i) - (int)(step / 2), numFirstSection +(step * i) + (int)(step / 2) - ((step % 2 == 0 && step > 4) ? 1 : 0));
+            if(numCurrentSection > countPanel)
+            {
+                numCurrentSection -= countPanel;
+            }
+            if (NewWarningPanel(numCurrentSection))
+            {
+                yield return null;
+                i++;
+            }
+            //selectSection[k] = "Cube" + i;
+            //MeshRenderer meshRenderer = Tube.transform.Find("Cube" + i).GetComponent<MeshRenderer>();
+            //Tube.transform.Find("Cube" + i).tag = "Select";          
+        }
+
+        yield return null;
+    }
+    //IEnumerator SpikeSession()
+    //{   //this hides all the active spikes.
+    //    if (ActiveSpikes.Count > 0)
+    //    {
+    //        foreach (GameObject g in ActiveSpikes)
+    //            g.SendMessage("HideSpikes");
+    //        //Destroy(g);
+
+    //        ActiveSpikes.Clear();
+
+    //        yield return new WaitForSeconds(0.05f);
+    //    }
+    //    //num_spikes is the number of spikes to be created.you can use your own algorithm.
+    //    int num_spikes = 5 + (Score / 3);
+
+    //    float currentAngle = 0;
+    //    float max_delta = 360 / num_spikes;
+    //    float min_delta = (360 * 0.5f) / (2 * Mathf.PI * PlatformRadius);
+
+    //    //Loop for creating spikes.
+    //    for (int i = 0; i < num_spikes; i++)
+    //    {
+    //        //GameObject sp = Instantiate(spike3d);
+    //        GameObject sp = ObjectPool.Instance.GetObjectForType("RedSpike", false);
+
+    //        sp.transform.parent = PlatformController.Instance.transform;
+    //        float angle = Random.Range(min_delta + (max_delta - min_delta) / 2, max_delta);
+    //        currentAngle += angle;
+    //        sp.transform.rotation = Quaternion.Euler(0, 0, 0 - currentAngle) * transform.rotation;
+    //        float rad = currentAngle * Mathf.PI / 180;
+    //        var scale = transform.parent.localScale.y * transform.parent.parent.localScale.y;
+    //        var localScale = new Vector3(sp.transform.localScale.x * scale, sp.transform.localScale.y * scale, sp.transform.localScale.z * scale);
+    //        sp.transform.localScale = localScale;
+    //        var spikeOffset = sp.transform.localScale.y * scale / 7;
+    //        //sp.transform.position = new Vector3((PlatformRadius - spikeOffset) * Mathf.Sin(rad), (PlatformRadius - spikeOffset) * Mathf.Cos(rad), Ball.transform.localPosition.z) + transform.position;
+    //        sp.transform.position = new Vector3((PlatformRadius - spikeOffset) * Mathf.Sin(rad), (PlatformRadius - spikeOffset) * Mathf.Cos(rad), Ball.transform.localPosition.z / 2) + transform.position;
+    //        //* transform.parent.localScale.y* transform.parent.localScale.y
+    //        //sp.transform.localScale = new Vector3(sp.transform.localScale.x , sp.transform.localScale.y , sp.transform.localScale.z );
+    //        ActiveSpikes.Add(sp);
+    //        sp.SendMessage("ShowSpikes");
+    //    }
+    //}
     // This function shows all the spikes around on launching game.
     public IEnumerator ShowFullSpikes()
     {
-		float circum = Mathf.PI * 2 * PlatformRadius;
-        int numSpikes = (int)(circum / 0.05f); // 0.5f is the base-length of the spike
-        float angleStep = 360f / numSpikes;     
+        int numSpikes = 10;
+        int step = Tube.transform.childCount / numSpikes;
 
-		//Loop for creating all the spikes around the platform.
+        //Loop for creating all the spikes around the platform.
+        for (int i = 0; i < numSpikes; i++)
+        {
+            NewWarningPanel(step * i + 1);
+        }
+        //After a second hiding all the spikes and then starting the spikes sessions.
+        yield return new WaitForSeconds(0.5f);
+
+        DeactiveSpikes();
+
+        yield return new WaitForSeconds(0.1f);
+
+        CreatePoint();
+        StartCoroutine(SpikeSession());
+        //SpikeSession();
+    }
+
+    /*
+    public IEnumerator ShowFullSpikes()
+    {
+        float circum = Mathf.PI * 2 * PlatformRadius;
+        //int numSpikes = (int)(circum / 0.02f); // 0.5f is the base-length of the spike
+        int numSpikes = 10;
+        float angleStep = 360f / numSpikes;
+
+        //Loop for creating all the spikes around the platform.
         for (int i = 0; i < numSpikes; i++)
         {
             //GameObject sp = Instantiate(spike3d);
-            GameObject sp = ObjectPool.Instance.GetObjectForType("spike3d", false);
+            GameObject sp = ObjectPool.Instance.GetObjectForType("redEffect", false);
 
             sp.transform.parent = PlatformController.Instance.transform;
             float angle = i * angleStep;
@@ -229,11 +331,9 @@ public class GameManager : MonoBehaviour {
             sp.SendMessage("SaveScale");
             var localScale = new Vector3(sp.transform.localScale.x * scale, sp.transform.localScale.y * scale, sp.transform.localScale.z * scale);
             sp.transform.localScale = localScale;
-            var spikeOffset = sp.transform.localScale.y * scale * 40    ;
-			sp.transform.localPosition = new Vector3(   (PlatformRadius - spikeOffset) * Mathf.Sin(angle), 
-                                                        (PlatformRadius - spikeOffset) * Mathf.Cos(angle), 
-                                                        Ball.transform.localPosition.z
-                                                    ) + transform.localPosition;
+            var spikeOffset = sp.transform.localScale.y * scale / 7;
+            //var spikeOffset = sp.transform.localScale.y * scale * 20;
+            sp.transform.position = new Vector3((PlatformRadius) * Mathf.Sin(angle), (PlatformRadius) * Mathf.Cos(angle), Ball.transform.localPosition.z / 2) + transform.position;
             //sp.transform.localScale = new Vector3(sp.transform.localScale.x * transform.parent.localScale.x, sp.transform.localScale.y * transform.parent.localScale.y, sp.transform.localScale.z * transform.parent.localScale.y);
             ActiveSpikes.Add(sp);
             sp.SendMessage("ShowSpikes");
@@ -243,7 +343,7 @@ public class GameManager : MonoBehaviour {
 
         foreach (GameObject g in ActiveSpikes)
             g.SendMessage("HideSpikes");
-       // Destroy(g);
+        // Destroy(g);
         ActiveSpikes.Clear();
 
         yield return new WaitForSeconds(0.1f);
@@ -252,8 +352,7 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(SpikeSession());
         //SpikeSession();
     }
-
-
+    */
 
     //for creating particle effects(dead, wallhit). 
     public IEnumerator StartParticleEffect(GameObject obj, Vector3 pos, float sec_befrPool)
