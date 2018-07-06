@@ -9,11 +9,16 @@ public class PlatformController : MonoBehaviour {
     float deltaAngle = 0;
     float prevAngle = 0;
 
-    [SerializeField] private Transform _circle;
+    [SerializeField]
+    private Texture[] emissionTexture;
 
+    [SerializeField] private Transform _circle;
+    private SpriteRenderer loadCircle;
     void Awake()
     {
+        loadCircle = transform.Find("Circle0").GetComponent<SpriteRenderer>();
         Instance = this;
+        loadCircle.material.SetTexture("_EmissionMap", emissionTexture[0]);
     }
     public void FailGame()
     {
@@ -23,10 +28,44 @@ public class PlatformController : MonoBehaviour {
     {
         _circle.GetComponent<SpriteRenderer>().color = new Color(120 / 255f, 197 / 255f, 140 / 255f);
     }
+    public void StartFlashingLock(int hit)
+    {
+        try
+        {
+            loadCircle.material.SetTexture("_EmissionMap", emissionTexture[hit]);
+        }
+        catch(System.IndexOutOfRangeException e)
+        {
+            loadCircle.material.SetTexture("_EmissionMap", emissionTexture[emissionTexture.Length - 1]);
+        }
+        StartCoroutine(FlashingLock());
+    }
+    public void HitPoint(int hit)
+    {
+        
+    }
+    private IEnumerator FlashingLock()
+    {
+        int i = 0;
+        while (i < 10) 
+        {
+            _circle.localScale += 0.005f * Vector3.one;
+            yield return null;
+            i++;
+        }
+        i = 0;
+        while (i < 5)
+        {
+            _circle.localScale -= 0.01f * Vector3.one;
+            yield return null;
+            i++;
+        }
+        yield return null;
+    }
 
-    void Update () {
+    private void Update ()
+    {
 
-        // Check if there are any touches
 #if !UNITY_EDITOR  
         deltaAngle = Camera.main.transform.eulerAngles.z - prevAngle;
 
@@ -52,27 +91,21 @@ public class PlatformController : MonoBehaviour {
             }
         }
 
-        int sighDelta = 1;
-
-        if (Camera.main.transform.eulerAngles.y < 240 && Camera.main.transform.eulerAngles.y >= 90) sighDelta = -1;
-
-        transform.Rotate(0, 0, sighDelta * deltaAngle * rotateSpeed / 50);
+        transform.Rotate(0, 0, deltaAngle * rotateSpeed / 50);
         prevAngle = Camera.main.transform.eulerAngles.z;
 #else
+        float x = Input.GetAxis("Horizontal");
+        if (x > 0)
         {
-            float x = Input.GetAxis("Horizontal");
-            if (x > 0)
-            {
-                // Rotate Right
-                transform.Rotate(new Vector3(0, 0, Time.deltaTime * rotateSpeed));
-            }
-            else if (x < 0)
-            {
-                // Rotate Left
-                transform.Rotate(new Vector3(0, 0, -Time.deltaTime * rotateSpeed));
-            }
+            // Rotate Right
+            transform.Rotate(new Vector3(0, 0, Time.deltaTime * rotateSpeed));
         }
+        else if (x < 0)
+        {
+            // Rotate Left
+            transform.Rotate(new Vector3(0, 0, -Time.deltaTime * rotateSpeed));
+        }     
 #endif
-   
+
 	}
 }
