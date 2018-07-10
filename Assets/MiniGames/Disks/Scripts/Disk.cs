@@ -23,6 +23,7 @@ namespace DiskGame
 		public float winAngle;
 
 
+
 		private bool aligned = false;
 		public bool isAligned{
 			get{ return aligned; }
@@ -45,8 +46,8 @@ namespace DiskGame
 		}
 
 		private bool checkAlign(float precision)
-		{				
-			aligned = Mathf.Abs( item.transform.eulerAngles.y - winAngle ) < precision;
+		{			
+			aligned = Mathf.Abs( item.transform.localRotation.eulerAngles.y - winAngle ) < precision;
 			return aligned;	
 		}
 	}
