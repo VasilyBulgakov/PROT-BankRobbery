@@ -11,6 +11,9 @@ TagManager:
   - Tube
   - Select
   - Country
+  - Cube
+  - DiskRoot
+  - DiskItem
   layers:
   - Default
   - TransparentFX
@@ -26,7 +29,7 @@ TagManager:
   - Canvas
   - CanvasPiece
   - Country
-  - 
+  - Disk
   - 
   - 
   - 

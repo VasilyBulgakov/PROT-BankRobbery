@@ -73,3 +73,20 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 		applicationIsQuitting = true;
 	}
 }
+
+
+public class SharedInstance<T> : MonoBehaviour where T : Component
+{
+    /// <summary>
+    /// Singleton design pattern
+    /// </summary>
+    /// <value>The instance.</value>
+    public static T Instance
+    {
+        get
+        {
+            var inst = FindObjectOfType<T>();
+            return inst;
+        }
+    }
+}
