@@ -34,7 +34,7 @@ namespace DiskGame
 		
 		// Update is called once per frame
 		void Update () {
-			//#if UNITY_EDITOR
+			#if UNITY_EDITOR
 			if(Input.GetMouseButton(0))
 			{		
 				if( !selectedObject ){
@@ -56,40 +56,40 @@ namespace DiskGame
 				selectedObject = null;
 				checkAlignment();
 			}	
-			// #else
-			// if(Input.touchCount > 0)
-			// {		
-			// 	Touch touch = Input.GetTouch(0);
+			#else
+			if(Input.touchCount > 0)
+			{		
+				Touch touch = Input.GetTouch(0);
 
-			// 	if(touch.phase == TouchPhase.Began)
-			// 	{						
-			// 		GameObject obj = selectObject(touch.position);
-			// 		if(obj){						
-			// 			selectedObject = obj.GetComponent<Disk>();
-			// 		}					
-			// 	}
-			// 	if(touch.phase == TouchPhase.Moved)	
-			// 	{
-			// 		rotateByPixelCoordMove(touch.position);
-			// 	}
-			// 	if(touch.phase == TouchPhase.Ended)	
-			// 	{
-			// 		selectedObject = null;
-			// 		checkAlignment();
-			// 	}			
-			// }
-			// #endif
+				if(touch.phase == TouchPhase.Began)
+				{						
+					GameObject obj = selectObject(new Vector3(touch.position.x, touch.position.y));
+					if(obj){						
+						selectedObject = obj.GetComponent<Disk>();
+					}					
+				}
+				if(touch.phase == TouchPhase.Moved)	
+				{
+					rotateByPixelCoordMove(new Vector3(touch.position.x, touch.position.y));
+				}
+				if(touch.phase == TouchPhase.Ended)	
+				{
+					selectedObject = null;
+					checkAlignment();
+				}			
+			}
+			#endif
 		}
 
 		
 		private GameObject selectObject(Vector3 pixelCoord){
 			Ray ray = Camera.main.ScreenPointToRay(pixelCoord);
 			RaycastHit hit;
-
+			Debug.Log("selecting");
 			if(Physics.Raycast(ray, out hit, 10f, 1 << LayerMask.NameToLayer("Disk")))
 			{				
 				GameObject obj = hit.collider.transform.parent.gameObject;
-				
+				Debug.Log("selected" + hit.collider.name);
 				if(obj.tag == "DiskRoot")
 				{				
 					clickDir =  hit.point - obj.transform.position;	
@@ -100,6 +100,8 @@ namespace DiskGame
 		}
 
 		private void rotateByPixelCoordMove(Vector3 pixelCoord){
+			Debug.Log("rotating");
+			
 			Ray ray = Camera.main.ScreenPointToRay(pixelCoord);
 			RaycastHit hit;					
 			if(Physics.Raycast(ray, out hit, 10f, 1 << LayerMask.NameToLayer("Disk")))
