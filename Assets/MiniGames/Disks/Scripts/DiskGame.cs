@@ -99,6 +99,7 @@ namespace DiskGame
 			else
 			{
 				Debug.Log("no hit");
+				Debug.DrawLine(ray.origin, ray.direction * 10f, Color.red);
 			}
 			return null;
 		}

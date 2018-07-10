@@ -501,6 +501,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 64562439470451726, guid: c301618369bbfbc4791c80fbbc933efe,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64562439470451726, guid: c301618369bbfbc4791c80fbbc933efe,
+        type: 2}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64562439470451726, guid: c301618369bbfbc4791c80fbbc933efe,
+        type: 2}
+      propertyPath: m_CookingOptions
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c301618369bbfbc4791c80fbbc933efe, type: 2}
   m_IsPrefabParent: 0
@@ -597,7 +612,7 @@ Camera:
   m_GameObject: {fileID: 759031864}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -863,6 +878,21 @@ Prefab:
       propertyPath: winAngle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64982741049344820, guid: 100eb0e81ccea8045ad9b98d327e0a1b,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64982741049344820, guid: 100eb0e81ccea8045ad9b98d327e0a1b,
+        type: 2}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64982741049344820, guid: 100eb0e81ccea8045ad9b98d327e0a1b,
+        type: 2}
+      propertyPath: m_CookingOptions
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 100eb0e81ccea8045ad9b98d327e0a1b, type: 2}
   m_IsPrefabParent: 0
@@ -993,6 +1023,21 @@ Prefab:
       propertyPath: winAngle
       value: 247
       objectReference: {fileID: 0}
+    - target: {fileID: 64982741049344820, guid: 100eb0e81ccea8045ad9b98d327e0a1b,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64982741049344820, guid: 100eb0e81ccea8045ad9b98d327e0a1b,
+        type: 2}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64982741049344820, guid: 100eb0e81ccea8045ad9b98d327e0a1b,
+        type: 2}
+      propertyPath: m_CookingOptions
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 100eb0e81ccea8045ad9b98d327e0a1b, type: 2}
   m_IsPrefabParent: 0
@@ -1039,6 +1084,21 @@ Prefab:
         type: 2}
       propertyPath: winAngle
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 64982741049344820, guid: 100eb0e81ccea8045ad9b98d327e0a1b,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64982741049344820, guid: 100eb0e81ccea8045ad9b98d327e0a1b,
+        type: 2}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64982741049344820, guid: 100eb0e81ccea8045ad9b98d327e0a1b,
+        type: 2}
+      propertyPath: m_CookingOptions
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 100eb0e81ccea8045ad9b98d327e0a1b, type: 2}
