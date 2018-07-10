@@ -14,6 +14,10 @@ TagManager:
   - Cube
   - DiskRoot
   - DiskItem
+  - Throwable
+  - Monkey
+  - Edible
+  - Inedible
   layers:
   - Default
   - TransparentFX
@@ -30,7 +34,7 @@ TagManager:
   - CanvasPiece
   - Country
   - Disk
-  - 
+  - Throwable
   - 
   - 
   - 

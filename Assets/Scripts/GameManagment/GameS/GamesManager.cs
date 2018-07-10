@@ -9,7 +9,7 @@ namespace GamesManagement
 		{
 			GlobeGame,
 			PuzzleGame,
-			Rotation,
+			DiskGame,
 			RBGame,
 			FAGame
 		}

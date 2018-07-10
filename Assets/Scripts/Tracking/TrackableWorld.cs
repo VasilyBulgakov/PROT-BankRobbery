@@ -49,8 +49,8 @@ namespace Tracking
 			
             if (marker != null)
             {     
-                Debug.Log ("CorrectWithAnchor");
-			    Debug.Log (marker.AR_DetectedAnchorPos);           
+                // Debug.Log ("CorrectWithAnchor");
+			    // Debug.Log (marker.AR_DetectedAnchorPos);           
                 /*
                 stage               stage                        stage
                     scene       ->      anchor      -> move ->      scene
