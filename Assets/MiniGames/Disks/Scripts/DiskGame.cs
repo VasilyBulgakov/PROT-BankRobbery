@@ -34,7 +34,7 @@ namespace DiskGame
 		
 		// Update is called once per frame
 		void Update () {
-			#if UNITY_EDITOR
+			//#if UNITY_EDITOR
 			if(Input.GetMouseButton(0))
 			{		
 				if( !selectedObject ){
@@ -56,29 +56,29 @@ namespace DiskGame
 				selectedObject = null;
 				checkAlignment();
 			}	
-			#else
-			if(Input.touchCount > 0)
-			{		
-				Touch touch = Input.GetTouch(0);
+			// #else
+			// if(Input.touchCount > 0)
+			// {		
+			// 	Touch touch = Input.GetTouch(0);
 
-				if(touch.phase == TouchPhase.Began)
-				{						
-					GameObject obj = selectObject(touch.position);
-					if(obj){						
-						selectedObject = obj.GetComponent<Disk>();
-					}					
-				}
-				if(touch.phase == TouchPhase.Moved)	
-				{
-					rotateByPixelCoordMove(touch.position);
-				}
-				if(touch.phase == TouchPhase.Ended)	
-				{
-					selectedObject = null;
-					checkAlignment();
-				}			
-			}
-			#endif
+			// 	if(touch.phase == TouchPhase.Began)
+			// 	{						
+			// 		GameObject obj = selectObject(touch.position);
+			// 		if(obj){						
+			// 			selectedObject = obj.GetComponent<Disk>();
+			// 		}					
+			// 	}
+			// 	if(touch.phase == TouchPhase.Moved)	
+			// 	{
+			// 		rotateByPixelCoordMove(touch.position);
+			// 	}
+			// 	if(touch.phase == TouchPhase.Ended)	
+			// 	{
+			// 		selectedObject = null;
+			// 		checkAlignment();
+			// 	}			
+			// }
+			// #endif
 		}
 
 		
