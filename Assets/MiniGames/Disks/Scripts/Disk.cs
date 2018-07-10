@@ -43,6 +43,12 @@ namespace DiskGame
 				transform.Find("Cylinder").GetComponent<Renderer>().material.SetColor("_Color", colorAligned);
 			else
 				transform.Find("Cylinder").GetComponent<Renderer>().material.SetColor("_Color", colorNotAligned);
+
+			foreach(var c in transform.GetComponentsInChildren<Collider>())
+			{
+				c.transform.Translate(new Vector3(0,0.1f,0));
+				c.transform.Translate(new Vector3(0,-0.1f,0));
+			}
 		}
 
 		private bool checkAlign(float precision)
