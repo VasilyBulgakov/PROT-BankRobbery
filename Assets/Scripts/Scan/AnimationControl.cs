@@ -20,7 +20,7 @@ public class AnimationControl : MonoBehaviour {
 	public float curScanTime = 0;
 	public float lastScanTime = 0;
 
-	MeshRenderer renderer;
+	MeshRenderer rend;
 	
 
 	private void Start() {
@@ -31,8 +31,8 @@ public class AnimationControl : MonoBehaviour {
 
 		slider.gameObject.SetActive(false);
 
-		renderer = GetComponent<MeshRenderer>();
-		renderer.enabled = false;
+		rend = GetComponent<MeshRenderer>();
+		rend.enabled = false;
 	}
 
 	private void setActive(){
@@ -63,14 +63,14 @@ public class AnimationControl : MonoBehaviour {
 	private void enable() {		
 		GetComponent<Animator>().SetBool("Visible", true);	
 
-		renderer.material = scanned;
-		renderer.enabled = true;
+		rend.material = scanned;
+		rend.enabled = true;
 		
 	}
 	private void disable() {		
 		GetComponent<Animator>().SetBool("Visible", false);
-		renderer.material = normal;		
-		renderer.enabled = false;	
+		rend.material = normal;		
+		rend.enabled = false;	
 	}
 	private void FixedUpdate() {		
 		slider.value = curScanTime/scanTimeThreshold;

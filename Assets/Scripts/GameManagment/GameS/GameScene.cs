@@ -24,21 +24,34 @@ namespace GamesManagement
 			}		
 		}
 
-		private void Start() {
+
+		private void Start() {			
 			begin();			
 		}
 
+		public virtual void SetState(GameState st) {
+            if (st != null) {                
+                _state.UpdateState(st as GameState);
+
+                mSceneObject.transform.SetPositionAndRotation(_state.tr.position, _state.tr.rotation);                
+                mSceneObject.transform.localScale = _state.tr.localScale;
+            }
+        }
+
 		public void win(){
-			
+			_state.gameState = GameStates.finished;
 			onWin.Invoke();
 		}	
 		public void lose(){
+			_state.gameState = GameStates.failed;
 			onLose.Invoke();
 		}
 		public void cancel(){
+			_state.gameState = GameStates.canceled;
 			onCancel.Invoke();
 		}
 		public void begin(){
+			_state.gameState = GameStates.inProgress;
 		}
 	}
 }

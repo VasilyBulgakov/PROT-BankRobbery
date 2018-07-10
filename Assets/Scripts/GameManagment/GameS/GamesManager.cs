@@ -25,25 +25,25 @@ namespace GamesManagement
 		{
 			Debug.Log("Loading at " + point.position);
 
-			loadGame("PuzzleGame", point);
+			loadGame("PuzzleGame", new GameState(point));
 		}
 
 		public void launchDisk(Transform point)
 		{
 			Debug.Log("Loading at " + point.position);
 
-			loadGame("DiskGame", point);
+			loadGame("DiskGame", new GameState(point));
 		}
 
 
-		public static GameObject loadGame(string name, Transform point)
+		public static GameObject loadGame(string name, GameState state)
 		{
 			GameObject prefab = Resources.Load( GAMES_PATH + name ) as GameObject;
 			if(prefab != null)
 			{
 				GameObject obj = GameObject.Instantiate(prefab);
 				obj.name = name;
-				//obj.GetComponent<GameState>().set
+				obj.GetComponent<GameScene>().SetState(state);
 			}			
 			return null;
 		}

@@ -30,7 +30,7 @@ namespace DiskGame
 
 		public void rotateItem(float angle, float precision)
 		{			
-			item.transform.Rotate(item.transform.worldToLocalMatrix * item.transform.up, angle);
+			item.transform.Rotate(Vector3.up, angle);
 
 
 			if( !aligned && checkAlign(precision) )

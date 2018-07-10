@@ -13,7 +13,7 @@ namespace GamesManagement
 	}
 
 	public class GameState{
-		public GameStates gameResult = GameStates.inProgress;
+		public GameStates gameState = GameStates.inProgress;
 		public Transform tr;	
 	
         public GameState() { }
