@@ -96,6 +96,10 @@ namespace DiskGame
 					return obj;
 				}
 			}
+			else
+			{
+				Debug.Log("no hit");
+			}
 			return null;
 		}
 
