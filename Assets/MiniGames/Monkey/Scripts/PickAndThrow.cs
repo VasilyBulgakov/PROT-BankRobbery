@@ -66,6 +66,9 @@ namespace MonkeyGame{
 			{		
 				Touch touch = Input.GetTouch(0);
 				Vector3 curMousePos = touch.position;
+				if( selectedObject ){					
+						selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * holdDist;
+				}
 				if(touch.phase == TouchPhase.Began)
 				{
 					if( !selectedObject )
@@ -73,16 +76,12 @@ namespace MonkeyGame{
 						GameObject obj = clickObject(curMousePos);
 						if(obj){						
 							selectedObject = obj;	
-							selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2;					
+							selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * holdDist;					
 						}
 					}
 				}	
 				if(touch.phase == TouchPhase.Moved)	
 				{
-					if( selectedObject ){					
-						selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2;
-					}
-
 					delta = curMousePos - lastMousePos;
 					if(swingInProgress){
 						updateSwing(delta.y);
