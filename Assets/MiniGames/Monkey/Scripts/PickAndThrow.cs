@@ -6,6 +6,15 @@ namespace MonkeyGame{
 		
 	public class PickAndThrow : MonoBehaviour {
 
+		public float minSpeed = 1f;
+
+		public float holdDist= 1f; 
+
+		public float throwStrengthMuliplier = 0.01f;
+
+		[Range(0, 60)]
+		public float throwUpAddition = 10;
+
 		GameObject selectedObject;
 
 		Vector3 lastMousePos;
@@ -35,7 +44,7 @@ namespace MonkeyGame{
 					}
 				}
 				if( selectedObject ){					
-					selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2;
+					selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * holdDist;
 				}
 
 				delta = curMousePos - lastMousePos;
@@ -50,7 +59,7 @@ namespace MonkeyGame{
 			}		
 			if(Input.GetMouseButtonUp(0))
 			{				
-				throwSelected(endSwing() / 100);						
+				throwSelected( endSwing() * throwStrengthMuliplier / 100 );						
 			}
 			#else
 			if(Input.touchCount > 0)
@@ -84,13 +93,14 @@ namespace MonkeyGame{
 				}
 				if(touch.phase == TouchPhase.Ended)
 				{				
-					throwSelected(endSwing() / 100);						
+					throwSelected(endSwing()  * throwStrengthMuliplier / 100);						
 				}
 
 				lastMousePos = curMousePos;
 			}
 			#endif
 		}
+
 
 		private void startSwing(float delta){
 			if(delta * Time.deltaTime < throwThreshold) return;			
@@ -104,8 +114,7 @@ namespace MonkeyGame{
 			if(delta * Time.deltaTime < throwThreshold) stopSwing();
 			swingDist += delta;		
 		
-		}
-		
+		}		
 		/// <returns> velocity of swing</returns>
 		private float endSwing(){
 			if(!swingInProgress) return 0;
@@ -137,8 +146,10 @@ namespace MonkeyGame{
 
 		private void throwSelected(float speed){
 			if( !selectedObject )	return;	
-			Vector3 vector = Camera.main.transform.forward;
-			vector = vector*speed + vector*10;
+			Vector3 vector = Camera.main.transform.forward.normalized;
+			vector = Quaternion.AngleAxis(-throwUpAddition, Camera.main.transform.right) * vector;			
+			vector = vector*speed + vector*minSpeed;
+
 			Debug.Log("throw speed: " + vector.magnitude);
 			selectedObject.GetComponent<Rigidbody>().AddForce(vector, ForceMode.VelocityChange);
 
