@@ -6,7 +6,7 @@ namespace MonkeyGame{
 	[RequireComponent(typeof(Rigidbody))]
 	public class Throwable : MonoBehaviour {
 		
-		float gravity = 1f;
+		float gravity = 2f;
 
 		public delegate void DestroyEvent();
     	public event DestroyEvent OnDestroyEvent;
@@ -14,7 +14,7 @@ namespace MonkeyGame{
 	
 		Rigidbody rb;
 
-		bool collidedWithMonkey = false;
+		public bool holded = false;
 
 		// Use this for initialization
 		void Start () {			
@@ -22,8 +22,12 @@ namespace MonkeyGame{
 		}
 		
 		// Update is called once per frame
-		void Update () {
-			rb.AddForce( -Vector3.up * gravity);
+		void FixedUpdate() {
+			if(holded)									
+				rb.MoveRotation(Quaternion.Euler(rb.rotation.eulerAngles + new Vector3(22,0,22)*Time.fixedDeltaTime )	);
+			else
+				rb.AddForce( -Vector3.up * gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
+
 
 			if(transform.position.y  < -10){							
 				Destroy(gameObject);		
@@ -37,7 +41,7 @@ namespace MonkeyGame{
 
 		
 		private void OnCollisionEnter(Collision other) {
-			if(other.gameObject.tag == "Monkey")
+			if(other.gameObject.tag == "Monkey" && !holded)
 			{
 				other.gameObject.GetComponent<MonkeyActions>().interact(gameObject);				
 			}

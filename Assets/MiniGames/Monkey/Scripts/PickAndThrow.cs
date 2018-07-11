@@ -40,7 +40,8 @@ namespace MonkeyGame{
 				if( !selectedObject ){
 					GameObject obj = clickObject(curMousePos);
 					if(obj){						
-						selectedObject = obj;						
+						selectedObject = obj;
+						selectedObject.GetComponent<Throwable>().holded = true;												
 					}
 				}
 				if( selectedObject ){					
@@ -77,6 +78,7 @@ namespace MonkeyGame{
 						if(obj){						
 							selectedObject = obj;	
 							selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * holdDist;					
+							selectedObject.GetComponent<Throwable>().holded = true;	
 						}
 					}
 				}	
@@ -145,6 +147,7 @@ namespace MonkeyGame{
 
 		private void throwSelected(float speed){
 			if( !selectedObject )	return;	
+			
 			Vector3 vector = Camera.main.transform.forward.normalized;
 			vector = Quaternion.AngleAxis(-throwUpAddition, Camera.main.transform.right) * vector;			
 			vector = vector*speed + vector*minSpeed;
@@ -152,7 +155,8 @@ namespace MonkeyGame{
 			Debug.Log("throw speed: " + vector.magnitude);
 			selectedObject.GetComponent<Rigidbody>().AddForce(vector, ForceMode.VelocityChange);
 
-			selectedObject = null;
+			selectedObject.GetComponent<Throwable>().holded = false;	
+			selectedObject = null;			
 		}
 	}
 }
