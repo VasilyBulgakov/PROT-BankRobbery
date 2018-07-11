@@ -123,12 +123,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4972941254319600, guid: 9109cfc545a6baa499f8bbd754fe9dc0,
     type: 2}
   m_PrefabInternal: {fileID: 1712662427}
---- !u!114 &14054775 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114279119158430820, guid: 9109cfc545a6baa499f8bbd754fe9dc0,
-    type: 2}
-  m_PrefabInternal: {fileID: 1712662427}
-  m_Script: {fileID: 11500000, guid: 2ba64159c4a245e47affe0180d0d03ff, type: 3}
 --- !u!1001 &250194502
 Prefab:
   m_ObjectHideFlags: 0
@@ -577,26 +571,6 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114052524402454800, guid: 9109cfc545a6baa499f8bbd754fe9dc0,
-        type: 2}
-      propertyPath: OnWellFed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114052524402454800, guid: 9109cfc545a6baa499f8bbd754fe9dc0,
-        type: 2}
-      propertyPath: OnWellFed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 14054775}
-    - target: {fileID: 114052524402454800, guid: 9109cfc545a6baa499f8bbd754fe9dc0,
-        type: 2}
-      propertyPath: OnWellFed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: win
-      objectReference: {fileID: 0}
-    - target: {fileID: 114052524402454800, guid: 9109cfc545a6baa499f8bbd754fe9dc0,
-        type: 2}
-      propertyPath: OnWellFed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9109cfc545a6baa499f8bbd754fe9dc0, type: 2}

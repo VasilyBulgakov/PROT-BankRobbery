@@ -29,7 +29,9 @@ namespace MonkeyGame{
 			if(slider != null){
 				slider.maxValue = maxFoodEaten;
 				slider.value = foodEaten;
-			}			
+			}
+			
+						
 		}
 		
 		// Update is called once per frame

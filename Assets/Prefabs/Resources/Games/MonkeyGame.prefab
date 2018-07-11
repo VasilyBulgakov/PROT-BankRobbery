@@ -302,7 +302,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4379615770060958}
   - component: {fileID: 65942901120372144}
-  - component: {fileID: 114871063120993446}
   - component: {fileID: 114515646680020294}
   - component: {fileID: 114845859953437726}
   m_Layer: 0
@@ -443,7 +442,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1117982309629120}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1231, y: 0.4802, z: -0.0612}
+  m_LocalPosition: {x: 0.385, y: 1.48, z: -0.198}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4189169454271466}
@@ -708,16 +707,16 @@ MonoBehaviour:
   OnWellFed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1627259725347210}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 114279119158430820}
+        m_MethodName: win
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -725,7 +724,7 @@ MonoBehaviour:
   eatEffect: {fileID: 198143593063865622}
   maxFoodEaten: 10
   foodEaten: 0
-  hungerTimer: 3
+  hungerTimer: 5
   lastFeedingTime: 0
 --- !u!114 &114279119158430820
 MonoBehaviour:
@@ -955,19 +954,6 @@ MonoBehaviour:
   holdDist: 0.42
   throwStrengthMuliplier: 0.05
   throwUpAddition: 25
---- !u!114 &114871063120993446
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1961871431656750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09bfafb2cb9cfa941a1e7108d632ef7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monkeyPos: {fileID: 4348270745020248}
-  monkey: {fileID: 1117982309629120}
 --- !u!136 &136525044909846906
 CapsuleCollider:
   m_ObjectHideFlags: 1
