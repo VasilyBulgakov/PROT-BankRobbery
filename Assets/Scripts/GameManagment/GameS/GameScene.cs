@@ -24,6 +24,11 @@ namespace GamesManagement
 			}		
 		}
 
+		private void FixedUpdate() {
+			// if( Vector3.SqrMagnitude(Camera.main.transform.position - _state.tr.position) > 25f )
+			// 	cancel();
+		}
+
 
 		private void Start() {			
 			begin();			
@@ -47,7 +52,7 @@ namespace GamesManagement
 			onLose.Invoke();
 		}
 		public void cancel(){
-			_state.gameState = GameStates.canceled;
+			_state.gameState = GameStates.canceled;			
 			onCancel.Invoke();
 		}
 		public void begin(){
