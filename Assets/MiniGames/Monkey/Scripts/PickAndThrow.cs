@@ -33,20 +33,17 @@ namespace MonkeyGame{
 		
 		// Update is called once per frame
 		void Update () {
+			if( selectedObject ){					
+				selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * holdDist;
+			}
+
 			#if UNITY_EDITOR
 			if(Input.GetMouseButton(0))
 			{		
 				Vector3 curMousePos = Input.mousePosition;
 				if( !selectedObject ){
-					GameObject obj = clickObject(curMousePos);
-					if(obj){						
-						selectedObject = obj;
-						selectedObject.GetComponent<Throwable>().holded = true;												
-					}
-				}
-				if( selectedObject ){					
-					selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * holdDist;
-				}
+					pickObject(curMousePos);
+				}				
 
 				delta = curMousePos - lastMousePos;
 				if(swingInProgress){
@@ -67,23 +64,17 @@ namespace MonkeyGame{
 			{		
 				Touch touch = Input.GetTouch(0);
 				Vector3 curMousePos = touch.position;
-				if( selectedObject ){					
-						selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * holdDist;
-				}
+				
 				if(touch.phase == TouchPhase.Began)
 				{
 					if( !selectedObject )
 					{
-						GameObject obj = clickObject(curMousePos);
-						if(obj){						
-							selectedObject = obj;	
-							selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * holdDist;					
-							selectedObject.GetComponent<Throwable>().holded = true;	
-						}
+						pickObject(curMousePos);
 					}
 				}	
 				if(touch.phase == TouchPhase.Moved)	
 				{
+					
 					delta = curMousePos - lastMousePos;
 					if(swingInProgress){
 						updateSwing(delta.y);
@@ -126,6 +117,18 @@ namespace MonkeyGame{
 			swingInProgress = false;
 			swingDist = 0;
 			Debug.Log("Stop swing");
+		}
+
+
+		private void pickObject(Vector3 pixelCoord){
+			GameObject obj = clickObject(pixelCoord);
+			if(obj){						
+				selectedObject = obj;	
+				selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * holdDist;	
+				Throwable comp = selectedObject.GetComponent<Throwable>();
+				if(comp) 
+					comp.holded = true;	
+			}
 		}
 
 		private GameObject clickObject(Vector3 pixelCoord){

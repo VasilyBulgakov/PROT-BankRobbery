@@ -10,6 +10,8 @@ namespace MonkeyGame{
 
 		public UnityEngine.UI.Slider slider;
 
+		public ParticleSystem eatEffect;
+
 
 
 		public int maxFoodEaten = 10;
@@ -66,12 +68,21 @@ namespace MonkeyGame{
 				slider.value = foodEaten;			
 		}
 
+		private void playAnimation(Vector3 pos){
+			if(eatEffect == null) return;
+
+			eatEffect.transform.position= pos;
+			eatEffect.Play();
+			
+		}
+
 		private void catchFood(GameObject food)
 		{
 			Debug.Log("Caught food" + food.name);
 			
 			Destroy(food);
 			updateHunger(1);
+			playAnimation(food.transform.position);
 			//do catch animation
 		}
 		private void brushOffJunk(GameObject junk)
