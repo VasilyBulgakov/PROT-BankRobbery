@@ -17,11 +17,16 @@ namespace Tracking {
 		        
         private Coroutine _coroutineLocalization;
 
+        public GameObject mainAnchorHighlight;
+        private GameObject highlightInstance;
+
         private void Start() {
 			if (Stage == null) {
 				Debug.Log("AnchorStage must be specified");
 				return;
 			}
+
+            if(highlightInstance == null) highlightInstance = GameObject.Instantiate(mainAnchorHighlight);
 
             foreach (var marker in TrackableWorld.Anchors)
             {
@@ -31,6 +36,7 @@ namespace Tracking {
                 marker.detectionLost += OnMarkerLost;
             }
 
+            //
 			//FindObjectOfType<PositioningBehaviour>().planeFound += OnPlaneFound;
         }
 
@@ -53,6 +59,9 @@ namespace Tracking {
         private void OnPlaneFound(GameObject anchor)
         {
             Debug.Log("FOUND PLANE!!");
+            //Stage.SetActive(true);
+
+
             // Stage.transform.parent = anchor.transform;
             // Stage.transform.localPosition = Vector3.zero;
             // Stage.transform.localRotation = Quaternion.identity;
@@ -78,13 +87,15 @@ namespace Tracking {
 
             _currentAnchors.Add(marker);
             // if (_currentAnchor == null) {
-            TrackableWorld.CorrectWithAnchor(marker);
+            TrackableWorld.CorrectWithAnchor(marker);            
             _mainAnchor = marker;
+            highlightInstance.transform.SetPositionAndRotation(_mainAnchor.transform.position, _mainAnchor.transform.rotation);
             // }
         }
 
         private void OnMarkerUpdate(WallMarker marker)
         {
+            highlightInstance.transform.SetPositionAndRotation(_mainAnchor.transform.position, _mainAnchor.transform.rotation);
             TrackableWorld.CorrectWithAnchor(marker);
         }
 
@@ -96,7 +107,9 @@ namespace Tracking {
                 if (_currentAnchors.Count > 0)
                 {
                     // make another anchor main
+                    
                     _mainAnchor = _currentAnchors[_currentAnchors.Count - 1];
+                    highlightInstance.transform.SetPositionAndRotation(_mainAnchor.transform.position, _mainAnchor.transform.rotation);
                 }                
             }
         }

@@ -22,12 +22,11 @@ namespace Tracking
         public WallMarker[] Anchors;
 
         private Vector3[] offsets;
-
-        public Animator anim;
+        
 
         private void Start()
         {
-            anim = GetComponent<Animator>();
+            
             if (OnCorrection == null)
                 OnCorrection = new UnityEvent();
             if (OnFirstCorrection == null)
