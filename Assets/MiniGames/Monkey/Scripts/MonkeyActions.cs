@@ -31,7 +31,7 @@ namespace MonkeyGame{
 				slider.value = foodEaten;
 			}
 			
-						
+			OnWellFed.AddListener(FindObjectOfType<MonkeyGameController>().doWin);		
 		}
 		
 		// Update is called once per frame

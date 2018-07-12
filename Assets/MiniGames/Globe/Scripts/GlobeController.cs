@@ -45,6 +45,13 @@ namespace GlobeGame
 				countries[i] = holder.transform.GetChild(i).gameObject;
 		}
 		
+		private void doWin()
+		{
+			Debug.Log("WIN");
+			FindObjectOfType<SceneManagement.GlobeGameScene>().doWin();
+		}
+
+
 		// Update is called once per frame
 		void Update () {
 		#if UNITY_EDITOR
@@ -126,7 +133,7 @@ namespace GlobeGame
 			}
 			if(wrongSelect == 0 && needToSelect  == 0)
 			{
-				Debug.Log("WIN");
+				doWin();
 			}		
 		}
 

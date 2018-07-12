@@ -20,5 +20,10 @@ namespace MonkeyGame{
 		void Update () {
 			
 		}
+
+		public void doWin()
+		{
+			FindObjectOfType<SceneManagement.MonkeyGameScene>().doWin();
+		}
 	}
 }

@@ -26,6 +26,11 @@ namespace DiskGame
 			}
 		}
 
+		private void doWin()
+		{
+			FindObjectOfType<SceneManagement.DiskGameScene>().doWin();
+		}
+
 		Disk selectedObject;
 
 		float holding;
@@ -133,8 +138,9 @@ namespace DiskGame
 				if(item.isAligned) count--;
 			}
 			if(count == 0)
-			{
+			{				
 				allAligned.Invoke();
+				doWin();
 			}
 		}
 		

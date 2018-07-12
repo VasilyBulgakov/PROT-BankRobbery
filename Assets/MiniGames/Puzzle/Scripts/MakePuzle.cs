@@ -65,6 +65,10 @@ namespace DiskGame
 			createPainting();
 		}	
 
+		private void doWin()
+		{
+			FindObjectOfType<SceneManagement.PuzzleGameScene>().doWin();
+		}
 		
 		private void FixedUpdate() {
 			if( !exploded && autoExplode )
@@ -166,6 +170,7 @@ namespace DiskGame
 				Debug.Log("DONE!");
 				completed = true;
 				OnComplete.Invoke();
+				doWin();
 			}
 		}
 	}
