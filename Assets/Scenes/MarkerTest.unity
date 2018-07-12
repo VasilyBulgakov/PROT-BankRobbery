@@ -687,7 +687,7 @@ Prefab:
         type: 2}
       propertyPath: referenceImage
       value: 
-      objectReference: {fileID: 11400000, guid: 91c5e3b40de0f394390acea16ea3e216,
+      objectReference: {fileID: 11400000, guid: 754dc0b3ccf65e34fa3988d34bde8bd9,
         type: 2}
     - target: {fileID: 114307497615699038, guid: 9c2f4cc3b987e2d41a4158026fa314ba,
         type: 2}
