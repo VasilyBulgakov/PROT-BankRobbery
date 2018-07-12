@@ -46,15 +46,13 @@ namespace MonkeyGame{
 					updateHunger(-1);				
 			}
 		}
-		public void interact(GameObject item){
-			if(item.tag == "Edible" && !wellFed)
-			{
-				catchFood(item);
-			}
-			else
-			{
-				brushOffJunk(item);
-			}
+		public void interact(GameObject obj){
+			ThrowableItem item = obj.GetComponent<ThrowableItem>();
+			if(item && item.nutrition > 0)			
+				catchFood(item.gameObject);
+			else			
+				brushOffJunk(item.gameObject);	
+			
 		}
 
 		private void updateHunger(int change){

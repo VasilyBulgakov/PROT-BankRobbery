@@ -132,8 +132,10 @@ namespace GlobeGame
 
 		private void doMouseRotation()
 		{
-			deltaDrag =  lastMousePos - Input.mousePosition;
-			rotateTarget.transform.Rotate(0, deltaDrag.x * mouseSensetivity * Time.deltaTime, 0);		
+			deltaDrag =  (lastMousePos - Input.mousePosition) * mouseSensetivity * Time.deltaTime;
+			rotateTarget.transform.Rotate(rotateTarget.transform.up,  deltaDrag.x);
+			//rotateTarget.transform.Rotate(rotateTarget.transform.up,  deltaDrag.x);	
+			//rotateTarget.transform.Rotate(rotateTarget.transform.worldToLocalMatrix * Camera.main.transform.right, deltaDrag.y);
 		}
 
 

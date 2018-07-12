@@ -357,7 +357,7 @@ Prefab:
     - target: {fileID: 114632184284535608, guid: f89fde87df87c3d4a92f642894d92ac7,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: launchDisk
+      value: launchMonkey
       objectReference: {fileID: 0}
     - target: {fileID: 4613180042390404, guid: f89fde87df87c3d4a92f642894d92ac7, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x

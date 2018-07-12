@@ -78,7 +78,7 @@ namespace MonkeyGame{
 			
 			obj.transform.SetPositionAndRotation( spawnPoint.position, spawnPoint.rotation);			
 			obj.transform.Translate( spawnRandomPos(heightOffset) );			
-			obj.GetComponent<Throwable>().OnDestroyEvent += itemDied;
+			obj.GetComponent<ThrowableItem>().OnDestroyEvent += itemDied;
 		}
 		Vector3 spawnRandomPos(float heightOffset = 0)
 		{

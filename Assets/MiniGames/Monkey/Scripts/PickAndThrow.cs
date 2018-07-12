@@ -125,7 +125,7 @@ namespace MonkeyGame{
 			if(obj){						
 				selectedObject = obj;	
 				selectedObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * holdDist;	
-				Throwable comp = selectedObject.GetComponent<Throwable>();
+				ThrowableItem comp = selectedObject.GetComponent<ThrowableItem>();
 				if(comp) 
 					comp.holded = true;	
 			}
@@ -158,7 +158,7 @@ namespace MonkeyGame{
 			Debug.Log("throw speed: " + vector.magnitude);
 			selectedObject.GetComponent<Rigidbody>().AddForce(vector, ForceMode.VelocityChange);
 
-			selectedObject.GetComponent<Throwable>().holded = false;	
+			selectedObject.GetComponent<ThrowableItem>().holded = false;	
 			selectedObject = null;			
 		}
 	}

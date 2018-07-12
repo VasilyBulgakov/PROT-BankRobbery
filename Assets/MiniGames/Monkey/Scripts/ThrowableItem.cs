@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace MonkeyGame{
 	[RequireComponent(typeof(Rigidbody))]
-	public class Throwable : MonoBehaviour {
+	public class ThrowableItem : MonoBehaviour {
+		public int nutrition = 0;
 		
 		float gravity = 2f;
 
