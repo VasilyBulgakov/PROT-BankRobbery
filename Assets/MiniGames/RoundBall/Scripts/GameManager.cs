@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour {
         FindObjectOfType<PlatformController>().WinGame();
         yield return new WaitForSeconds(1.5f);
 
-        //FindObjectOfType<SceneManagement.RBGameScene>().doWin();
+        FindObjectOfType<SceneManagement.RBGameScene>().doWin();
     }
     public void isLose()
     {
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(0.3f);
         FindObjectOfType<PlatformController>().FailGame();
         yield return new WaitForSeconds(1.5f);
-        //FindObjectOfType<SceneManagement.RBGameScene>().doFail();
+        FindObjectOfType<SceneManagement.RBGameScene>().doFail();
     }
     public IEnumerator RestartGame()
     {

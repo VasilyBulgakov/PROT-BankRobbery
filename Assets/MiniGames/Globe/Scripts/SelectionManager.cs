@@ -2,33 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectionManager : MonoBehaviour {
+namespace GlobeGame
+{
 
-	public GameObject selectionPrefab;
-	bool canClick = true;
+	public class SelectionManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+		public GameObject selectionPrefab;
+		bool canClick = true;
+
+		// Use this for initialization
+		void Start () {
+			
+		}
 		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	private void OnMouseDrag() {		
-		canClick = false;
-	}
-	private void OnMouseUp() {
-		if( selectionPrefab == null ) return;
-		if( !canClick ){
-			canClick = true;
-			return;
+		// Update is called once per frame
+		void Update () {
+			
 		}
 
+		private void OnMouseDrag() {		
+			canClick = false;
+		}
+		private void OnMouseUp() {
+			if( selectionPrefab == null ) return;
+			if( !canClick ){
+				canClick = true;
+				return;
+			}
 
-		
+
+			
+		}
+
 	}
-
 }
