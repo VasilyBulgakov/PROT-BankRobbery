@@ -49,7 +49,7 @@ namespace Tracking
             UnityARSessionNativeInterface.ARImageAnchorRemovedEvent += RemoveImageAnchor;
             Debug.Log("image anchor events added");
             AR_DetectedAnchorPos = transform;      
-                  
+            
         }
 
         void AddImageAnchor(ARImageAnchor arImageAnchor)
@@ -92,8 +92,8 @@ namespace Tracking
 
 				}
             }
-
         }
+
 		private IEnumerator HideMarker()
 		{
 			float timer = 0;

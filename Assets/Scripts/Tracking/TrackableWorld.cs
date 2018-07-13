@@ -78,11 +78,11 @@ namespace Tracking
                 
                 //workaround for unity bug: not updating boxcollider position
 
-                foreach(var cmp in GetComponentsInChildren<Collider>())
-                {
-                    cmp.transform.Translate( new Vector3(0,0,0.001f) );
-                    cmp.transform.Translate( new Vector3(0,0,-0.001f) );
-                }
+                // foreach(var cmp in GetComponentsInChildren<Collider>())
+                // {
+                //     cmp.transform.Translate( new Vector3(0,0,0.001f) );
+                //     cmp.transform.Translate( new Vector3(0,0,-0.001f) );
+                // }
 
 				// Debug.Log (Center.position);
 				// Debug.Log (Center.rotation);
