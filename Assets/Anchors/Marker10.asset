@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0414577f9c6b244e696949154859a4af, type: 3}
-  m_Name: TestRealObject
+  m_Name: Marker10
   m_EditorClassIdentifier: 
-  imageName: TestRealObject
-  imageTexture: {fileID: 2800000, guid: 40a8d22dfbc012140a1d8f71b9872341, type: 3}
-  physicalSize: 1
+  imageName: Marker10
+  imageTexture: {fileID: 2800000, guid: 46c8d0dd93c967849bf17c3b0b4d2a45, type: 3}
+  physicalSize: 0.21
