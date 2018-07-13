@@ -34,8 +34,8 @@ namespace Tracking {
                 marker.update += OnMarkerUpdate;
                 marker.detectionLost += OnMarkerLost;
             }
-            // if(anchorHighlight != null)
-            //     _anchorHighlight = GameObject.Insta
+            if(anchorHighlight != null)
+                _anchorHighlight = GameObject.Instantiate(anchorHighlight);
 
             //FloorMarker.SetActive(false);
 
@@ -84,6 +84,8 @@ namespace Tracking {
             // if (_currentAnchor == null) {
             TrackableWorld.CorrectWithAnchor(marker);
             _mainAnchor = marker;
+            anchorHighlight.transform.position = _mainAnchor.transform.position;
+            anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
             // }
         }
 
@@ -101,6 +103,8 @@ namespace Tracking {
                 {
                     // make another anchor main
                     _mainAnchor = _currentAnchors[_currentAnchors.Count - 1];
+                    anchorHighlight.transform.position = _mainAnchor.transform.position;
+                    anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
                 }
             }
         }
