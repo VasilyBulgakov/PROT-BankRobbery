@@ -47,7 +47,7 @@ namespace Tracking
             UnityARSessionNativeInterface.ARImageAnchorUpdatedEvent += UpdateImageAnchor;
             UnityARSessionNativeInterface.ARImageAnchorRemovedEvent += RemoveImageAnchor;
             Debug.Log("image anchor events added");
-            AR_DetectedAnchorPos = transform;
+            AR_DetectedAnchorPos = transform;             
         }
 
         void AddImageAnchor(ARImageAnchor arImageAnchor)
@@ -60,7 +60,8 @@ namespace Tracking
                 
 				if (Marker!=null)
                 {                    
-                    _myMarker = Instantiate(Marker, AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation);                   
+                    _myMarker = Instantiate(Marker, AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation); 
+                    _myMarker.GetComponent<MarkerQuadScript>().setARImage(referenceImage);             
                 }
                 if (detected != null)
 					detected(this);
@@ -83,8 +84,8 @@ namespace Tracking
 					update (this);
 					if (_myMarker!=null) 
                     {                        
-						_myMarker.transform.SetPositionAndRotation(AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation);
-						StartCoroutine (HideMarker ());
+						_myMarker.transform.SetPositionAndRotation(AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation);                         
+						//StartCoroutine (HideMarker ());
 					}
 
 				}

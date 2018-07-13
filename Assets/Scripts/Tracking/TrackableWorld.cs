@@ -25,8 +25,7 @@ namespace Tracking
         
 
         private void Start()
-        {
-            
+        {            
             if (OnCorrection == null)
                 OnCorrection = new UnityEvent();
             if (OnFirstCorrection == null)

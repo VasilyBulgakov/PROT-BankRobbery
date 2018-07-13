@@ -89,6 +89,7 @@ namespace Tracking {
             // if (_currentAnchor == null) {
             TrackableWorld.CorrectWithAnchor(marker);            
             _mainAnchor = marker;
+            
             highlightInstance.transform.SetPositionAndRotation(_mainAnchor.transform.position, _mainAnchor.transform.rotation);
             // }
         }
