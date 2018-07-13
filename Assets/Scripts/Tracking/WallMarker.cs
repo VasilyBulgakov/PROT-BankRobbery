@@ -50,6 +50,7 @@ namespace Tracking
 				if (Marker!=null)
                 {
                     _myMarker = Instantiate(Marker, Anchor.position, Anchor.rotation);
+                    _myMarker.GetComponent<MarkerQuadScript>().setARImage(referenceImage);
                 }
                 if (detected != null)
 					detected(this);

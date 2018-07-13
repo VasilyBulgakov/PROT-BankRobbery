@@ -25,7 +25,7 @@ namespace Tracking {
 				Debug.Log("AnchorStage must be specified");
 				return;
 			}
-			Stage.SetActive(false);
+			//Stage.SetActive(false);
 
             foreach (var marker in TrackableWorld.Anchors)
             {
