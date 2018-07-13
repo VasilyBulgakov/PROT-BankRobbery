@@ -171,16 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab16428a43ad9a94ea1a25c60f03c185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnFirstCorrection:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnCorrection:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   Center: {fileID: 0}
   Anchors:
   - {fileID: 559757437}
@@ -625,7 +615,7 @@ Prefab:
         type: 2}
       propertyPath: TargetAnchor
       value: 
-      objectReference: {fileID: 1533753607}
+      objectReference: {fileID: 0}
     - target: {fileID: 114307497615699038, guid: 9c2f4cc3b987e2d41a4158026fa314ba,
         type: 2}
       propertyPath: referenceImage
@@ -636,8 +626,7 @@ Prefab:
         type: 2}
       propertyPath: Marker
       value: 
-      objectReference: {fileID: 1514115545812832, guid: d43aa5027f8b11846939d9e025706602,
-        type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c2f4cc3b987e2d41a4158026fa314ba, type: 2}
   m_IsPrefabParent: 0
@@ -694,6 +683,12 @@ Prefab:
       propertyPath: Marker
       value: 
       objectReference: {fileID: 1514115545812832, guid: d43aa5027f8b11846939d9e025706602,
+        type: 2}
+    - target: {fileID: 114307497615699038, guid: 9c2f4cc3b987e2d41a4158026fa314ba,
+        type: 2}
+      propertyPath: referenceImage
+      value: 
+      objectReference: {fileID: 11400000, guid: ff754789498f90e4dab253f58f9adf26,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c2f4cc3b987e2d41a4158026fa314ba, type: 2}
@@ -837,7 +832,7 @@ Prefab:
         type: 2}
       propertyPath: TargetAnchor
       value: 
-      objectReference: {fileID: 107083459}
+      objectReference: {fileID: 0}
     - target: {fileID: 114307497615699038, guid: 9c2f4cc3b987e2d41a4158026fa314ba,
         type: 2}
       propertyPath: referenceImage
@@ -991,7 +986,7 @@ Prefab:
         type: 2}
       propertyPath: TargetAnchor
       value: 
-      objectReference: {fileID: 423117755}
+      objectReference: {fileID: 0}
     - target: {fileID: 114307497615699038, guid: 9c2f4cc3b987e2d41a4158026fa314ba,
         type: 2}
       propertyPath: referenceImage
@@ -1002,8 +997,7 @@ Prefab:
         type: 2}
       propertyPath: Marker
       value: 
-      objectReference: {fileID: 1514115545812832, guid: d43aa5027f8b11846939d9e025706602,
-        type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c2f4cc3b987e2d41a4158026fa314ba, type: 2}
   m_IsPrefabParent: 0
@@ -1257,7 +1251,7 @@ Prefab:
         type: 2}
       propertyPath: TargetAnchor
       value: 
-      objectReference: {fileID: 878991878}
+      objectReference: {fileID: 0}
     - target: {fileID: 114307497615699038, guid: 9c2f4cc3b987e2d41a4158026fa314ba,
         type: 2}
       propertyPath: referenceImage
@@ -1268,8 +1262,7 @@ Prefab:
         type: 2}
       propertyPath: Marker
       value: 
-      objectReference: {fileID: 1514115545812832, guid: d43aa5027f8b11846939d9e025706602,
-        type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c2f4cc3b987e2d41a4158026fa314ba, type: 2}
   m_IsPrefabParent: 0
@@ -1333,6 +1326,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1396896950}
   - component: {fileID: 1396896949}
+  - component: {fileID: 1396896952}
+  - component: {fileID: 1396896951}
   m_Layer: 0
   m_Name: TrackingManager
   m_TagString: Untagged
@@ -1353,7 +1348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stage: {fileID: 1346713412}
   TrackableWorld: {fileID: 30278370}
-  mainAnchorHighlight: {fileID: 1131598258291884, guid: e4a3c324ac27ea2489a1e3885eb58fdd,
+  anchorHighlight: {fileID: 1131598258291884, guid: e4a3c324ac27ea2489a1e3885eb58fdd,
     type: 2}
 --- !u!4 &1396896950
 Transform:
@@ -1368,6 +1363,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1396896951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1396896948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c535724c3a2e44dbdff4322379a15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1396896952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1396896948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ad7dd27f91b40d795074da66c4b4a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1533753606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,7 +1609,7 @@ Prefab:
         type: 2}
       propertyPath: TargetAnchor
       value: 
-      objectReference: {fileID: 879761059}
+      objectReference: {fileID: 0}
     - target: {fileID: 114307497615699038, guid: 9c2f4cc3b987e2d41a4158026fa314ba,
         type: 2}
       propertyPath: referenceImage
@@ -1603,8 +1620,7 @@ Prefab:
         type: 2}
       propertyPath: Marker
       value: 
-      objectReference: {fileID: 1514115545812832, guid: d43aa5027f8b11846939d9e025706602,
-        type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c2f4cc3b987e2d41a4158026fa314ba, type: 2}
   m_IsPrefabParent: 0
@@ -1655,7 +1671,7 @@ Prefab:
         type: 2}
       propertyPath: TargetAnchor
       value: 
-      objectReference: {fileID: 1417006}
+      objectReference: {fileID: 0}
     - target: {fileID: 114307497615699038, guid: 9c2f4cc3b987e2d41a4158026fa314ba,
         type: 2}
       propertyPath: referenceImage
@@ -1666,8 +1682,7 @@ Prefab:
         type: 2}
       propertyPath: Marker
       value: 
-      objectReference: {fileID: 1514115545812832, guid: d43aa5027f8b11846939d9e025706602,
-        type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c2f4cc3b987e2d41a4158026fa314ba, type: 2}
   m_IsPrefabParent: 0

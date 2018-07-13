@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.iOS;
 
-
 namespace Tracking
 {
     public class WallMarker : MonoBehaviour
@@ -24,20 +23,9 @@ namespace Tracking
         public Transform TargetAnchor;
 
         [HideInInspector]
-        public Transform AR_DetectedAnchorPos;
+        public Transform Anchor;
 
         public GameObject Marker;
-        /// <summary>
-        /// AR_DetectedAnchorPos - TargetAnchorPosition
-        /// </summary>
-        /// <returns></returns>
-        public Vector3 deltaScenePos2RealPos{
-            get{
-                return AR_DetectedAnchorPos.position - TargetAnchor.position;
-            }
-        }
-
-        private Vector3 delta;
 
         private GameObject _myMarker;  
 
@@ -47,9 +35,8 @@ namespace Tracking
             UnityARSessionNativeInterface.ARImageAnchorAddedEvent += AddImageAnchor;
             UnityARSessionNativeInterface.ARImageAnchorUpdatedEvent += UpdateImageAnchor;
             UnityARSessionNativeInterface.ARImageAnchorRemovedEvent += RemoveImageAnchor;
-            Debug.Log("image anchor events added");
-            AR_DetectedAnchorPos = transform;      
             
+            Anchor = transform;
         }
 
         void AddImageAnchor(ARImageAnchor arImageAnchor)
@@ -57,13 +44,12 @@ namespace Tracking
             Debug.Log("image anchor added");
             if (arImageAnchor.referenceImageName == referenceImage.imageName)
             {
-				AR_DetectedAnchorPos.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
-				AR_DetectedAnchorPos.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
-                
+				Anchor.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
+				Anchor.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
+
 				if (Marker!=null)
-                {                    
-                    _myMarker = Instantiate(Marker, AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation); 
-                    _myMarker.GetComponent<MarkerQuadScript>().setARImage(referenceImage);             
+                {
+                    _myMarker = Instantiate(Marker, Anchor.position, Anchor.rotation);
                 }
                 if (detected != null)
 					detected(this);
@@ -78,22 +64,21 @@ namespace Tracking
             {
 				_lastTimeUpdate = Time.time;
 
-                AR_DetectedAnchorPos.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
-                AR_DetectedAnchorPos.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
-                
+                Anchor.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
+                Anchor.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
+
 				if (update != null ) 
 				{
 					update (this);
-					if (_myMarker!=null) 
-                    {                        
-						_myMarker.transform.SetPositionAndRotation(AR_DetectedAnchorPos.position, AR_DetectedAnchorPos.rotation);                         
+					if (Marker!=null) {
+						_myMarker = Instantiate (Marker, Anchor.position, Anchor.rotation);
 						//StartCoroutine (HideMarker ());
 					}
 
 				}
             }
-        }
 
+        }
 		private IEnumerator HideMarker()
 		{
 			float timer = 0;

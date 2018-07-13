@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class lookAtPlayer : MonoBehaviour {
 
 	private UnityEngine.UI.Text text;
@@ -9,7 +10,7 @@ public class lookAtPlayer : MonoBehaviour {
 
 	Tracking.WallMarker marker;
 	
-	private void Start() {
+	public void Start() {
 		text = GetComponentInChildren<UnityEngine.UI.Text>();
 		bg = GetComponentInChildren<UnityEngine.UI.Image>();
 

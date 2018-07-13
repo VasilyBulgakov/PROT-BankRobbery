@@ -1,10 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-//using MultiplayerClient;
-
-
-
 
 
 namespace Tracking
@@ -12,103 +7,38 @@ namespace Tracking
 	[RequireComponent(typeof(ParentObject))]
     public class TrackableWorld : MonoBehaviour
     {
-        public UnityEvent OnFirstCorrection;
-        public UnityEvent OnCorrection;
-        
-        private bool firstCorrection = true;
-
         public Transform Center;
 
         public WallMarker[] Anchors;
 
-        private Vector3[] offsets;
-        
-
         private void Start()
-        {            
-            if (OnCorrection == null)
-                OnCorrection = new UnityEvent();
-            if (OnFirstCorrection == null)
-                OnFirstCorrection = new UnityEvent();
-
-            
-        }
-        private void FixedUpdate() {
-           #if UNITY_EDITOR 
-            foreach(WallMarker anchor in Anchors)
-            {
-                CorrectWithAnchor(anchor);
-            }
-            #endif
+        {
         }
 
         public void CorrectWithAnchor(WallMarker marker)
         {
-			
+			Debug.Log ("CorrectWithAnchor");
+			Debug.Log (marker.Anchor);
             if (marker != null)
-            {     
-                // Debug.Log ("CorrectWithAnchor");
-			    // Debug.Log (marker.AR_DetectedAnchorPos);           
-                /*
-                stage               stage                        stage
-                    scene       ->      anchor      -> move ->      scene
-                        anchor              scene                      anchor
-                 */
-                //set stage as child of ancchor
-                var targetAnchor = marker.TargetAnchor;
+            {
+
+                var targetAnchor = marker.Anchor;
                 var stageAnchor = marker.TargetAnchor;
                 stageAnchor.SetParent(transform.parent);
                 transform.SetParent(stageAnchor);
 
-                //move anchor to posion ddetected in AR, hence moving whole stage with it  
                 stageAnchor.SetPositionAndRotation(targetAnchor.position, targetAnchor.rotation);
-                
-                //stageAnchor.SetPositionAndRotation(detectedPos.position, detectedPos.rotation);
-                //revert back
+
                 transform.SetParent(stageAnchor.parent);
                 stageAnchor.SetParent(transform);
-                
-                if(firstCorrection){
-                    firstCorrection = false; 
-                    OnFirstCorrection.Invoke(); 
-                }
-                else {                           
-                    OnCorrection.Invoke();  
-                }
-                
-                //workaround for unity bug: not updating boxcollider position
 
-                // foreach(var cmp in GetComponentsInChildren<Collider>())
-                // {
-                //     cmp.transform.Translate( new Vector3(0,0,0.001f) );
-                //     cmp.transform.Translate( new Vector3(0,0,-0.001f) );
-                // }
+				Debug.Log (Center.position);
+				Debug.Log (Center.rotation);
 
-				// Debug.Log (Center.position);
-				// Debug.Log (Center.rotation);
-               
+                //var player = FindObjectOfType<Controller>();
+                // var corrPos = transform.InverseTransformPoint()
+                //player.SetCorrection(-Center.position, Quaternion.Inverse(Center.rotation));
             }
-            
-        }
-
-        private Vector3 calcDeltaUsingAllAnchors(WallMarker marker)
-        {
-            //TODO: implement           
-            
-            return marker.deltaScenePos2RealPos;
-        }
-
-
-        private void Update() 
-        {
-            
-        }
-        private void OnGUI() {
-            // var style = new GUIStyle();
-            // style.fontSize = 14;
-            // GUI.Box(new Rect(0,0, Screen.width, 40), "delta1: " + Anchors[0].deltaScenePos2RealPos.magnitude);
-            // GUI.Box(new Rect(0,100, Screen.width, 40), "delta2: " + Anchors[1].deltaScenePos2RealPos.magnitude);          
-        
         }
 
         private void OnDrawGizmos()

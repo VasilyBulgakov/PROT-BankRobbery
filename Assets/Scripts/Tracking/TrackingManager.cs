@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-//using MultiplayerClient;
+
 using UnityEngine.XR.iOS;
 using System.Collections;
 
@@ -17,16 +17,15 @@ namespace Tracking {
 		        
         private Coroutine _coroutineLocalization;
 
-        public GameObject mainAnchorHighlight;
-        private GameObject highlightInstance;
+        public GameObject anchorHighlight;
+        private GameObject _anchorHighlight;
 
         private void Start() {
 			if (Stage == null) {
 				Debug.Log("AnchorStage must be specified");
 				return;
 			}
-
-            if(highlightInstance == null) highlightInstance = GameObject.Instantiate(mainAnchorHighlight);
+			Stage.SetActive(false);
 
             foreach (var marker in TrackableWorld.Anchors)
             {
@@ -35,17 +34,15 @@ namespace Tracking {
                 marker.update += OnMarkerUpdate;
                 marker.detectionLost += OnMarkerLost;
             }
+            // if(anchorHighlight != null)
+            //     _anchorHighlight = GameObject.Insta
 
-            //
-			//FindObjectOfType<PositioningBehaviour>().planeFound += OnPlaneFound;
+            //FloorMarker.SetActive(false);
+
+			FindObjectOfType<PositioningBehaviour>().planeFound += OnPlaneFound;
+            //			UnityARSessionNativeInterface.ARAnchorAddedEvent += OnPlaneFound;
         }
 
-        //private UnityARAnchorManager _unityARAnchorManager;
-
-        //private void OnGUI()
-        //{            
-        //    GUI.Label(new Rect(0, 300, 400, 40), "Planes : " + _unityARAnchorManager.GetCurrentPlaneAnchors().Count);
-        //}
         private void OnDestroy()
         {
             foreach (var marker in _allAnchors)
@@ -58,13 +55,11 @@ namespace Tracking {
 
         private void OnPlaneFound(GameObject anchor)
         {
-            Debug.Log("FOUND PLANE!!");
-            //Stage.SetActive(true);
-
-
-            // Stage.transform.parent = anchor.transform;
-            // Stage.transform.localPosition = Vector3.zero;
-            // Stage.transform.localRotation = Quaternion.identity;
+            //Stage.transform.parent = anchor.transform;
+            //Stage.transform.localPosition = Vector3.zero;
+            //Stage.transform.localRotation = Quaternion.identity;
+            Stage.SetActive(true);
+            Debug.Log("ONPlaneFound");
         }
 
         /*public void StartLocalization()
@@ -87,16 +82,13 @@ namespace Tracking {
 
             _currentAnchors.Add(marker);
             // if (_currentAnchor == null) {
-            TrackableWorld.CorrectWithAnchor(marker);            
+            TrackableWorld.CorrectWithAnchor(marker);
             _mainAnchor = marker;
-            
-            highlightInstance.transform.SetPositionAndRotation(_mainAnchor.transform.position, _mainAnchor.transform.rotation);
             // }
         }
 
         private void OnMarkerUpdate(WallMarker marker)
         {
-            highlightInstance.transform.SetPositionAndRotation(_mainAnchor.transform.position, _mainAnchor.transform.rotation);
             TrackableWorld.CorrectWithAnchor(marker);
         }
 
@@ -108,10 +100,8 @@ namespace Tracking {
                 if (_currentAnchors.Count > 0)
                 {
                     // make another anchor main
-                    
                     _mainAnchor = _currentAnchors[_currentAnchors.Count - 1];
-                    highlightInstance.transform.SetPositionAndRotation(_mainAnchor.transform.position, _mainAnchor.transform.rotation);
-                }                
+                }
             }
         }
     /*    #region correct world anchor
