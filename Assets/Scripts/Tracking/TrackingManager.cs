@@ -84,8 +84,8 @@ namespace Tracking {
             // if (_currentAnchor == null) {
             TrackableWorld.CorrectWithAnchor(marker);
             _mainAnchor = marker;
-            anchorHighlight.transform.position = _mainAnchor.transform.position;
-            anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
+            _anchorHighlight.transform.position = _mainAnchor.transform.position;
+            _anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
             // }
         }
 
@@ -103,8 +103,8 @@ namespace Tracking {
                 {
                     // make another anchor main
                     _mainAnchor = _currentAnchors[_currentAnchors.Count - 1];
-                    anchorHighlight.transform.position = _mainAnchor.transform.position;
-                    anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
+                    _anchorHighlight.transform.position = _mainAnchor.transform.position;
+                    _anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
                 }
             }
         }

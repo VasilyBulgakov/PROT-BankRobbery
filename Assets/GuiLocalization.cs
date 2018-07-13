@@ -28,7 +28,7 @@ public class GuiLocalization : MonoBehaviour {
 	}
 
 	private void OnGUI() {
-		return;
+		return; //    <==========           /////////////////////////////////////////////////
 		if (_positioningBehaviour.IsFounding)
 		{
 			GUILayout.BeginArea(new Rect(Screen.width * 0.5f - width, height * 2f, width * 2, height));
