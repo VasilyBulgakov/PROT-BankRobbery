@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.iOS;
 
+
 namespace Tracking
 {
     public class WallMarker : MonoBehaviour
@@ -47,7 +48,8 @@ namespace Tracking
             UnityARSessionNativeInterface.ARImageAnchorUpdatedEvent += UpdateImageAnchor;
             UnityARSessionNativeInterface.ARImageAnchorRemovedEvent += RemoveImageAnchor;
             Debug.Log("image anchor events added");
-            AR_DetectedAnchorPos = transform;             
+            AR_DetectedAnchorPos = transform;      
+                  
         }
 
         void AddImageAnchor(ARImageAnchor arImageAnchor)
