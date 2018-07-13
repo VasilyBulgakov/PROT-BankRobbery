@@ -55,13 +55,13 @@ namespace Tracking
                         anchor              scene                      anchor
                  */
                 //set stage as child of ancchor
+                var targetAnchor = marker.TargetAnchor;
                 var stageAnchor = marker.TargetAnchor;
                 stageAnchor.SetParent(transform.parent);
                 transform.SetParent(stageAnchor);
 
                 //move anchor to posion ddetected in AR, hence moving whole stage with it  
-                stageAnchor.position += calcDeltaUsingAllAnchors(marker);
-                stageAnchor.rotation = marker.AR_DetectedAnchorPos.rotation;
+                stageAnchor.SetPositionAndRotation(targetAnchor.position, targetAnchor.rotation);
                 
                 //stageAnchor.SetPositionAndRotation(detectedPos.position, detectedPos.rotation);
                 //revert back
