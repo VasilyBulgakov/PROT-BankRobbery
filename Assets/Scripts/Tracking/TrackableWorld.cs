@@ -44,6 +44,7 @@ namespace Tracking
 
                 var targetAnchor = marker.Anchor;
                 var stageAnchor = marker.TargetAnchor;
+                if(stageAnchor == null) return;
                 stageAnchor.SetParent(transform.parent);
                 transform.SetParent(stageAnchor);
                 //why sometimes rotates??????????????????????
