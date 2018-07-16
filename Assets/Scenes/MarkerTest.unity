@@ -869,9 +869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stage: {fileID: 1346713412}
   TrackableWorld: {fileID: 30278370}
-  mainAnchorHighlight: {fileID: 1131598258291884, guid: e4a3c324ac27ea2489a1e3885eb58fdd,
-    type: 2}
-  normalAnchorHighlight: {fileID: 1131598258291884, guid: 03e0f9c128f86004db23c3756908e89f,
+  mainAnchorHighlight: {fileID: 1131598258291884, guid: 03e0f9c128f86004db23c3756908e89f,
     type: 2}
 --- !u!4 &1396896950
 Transform:
