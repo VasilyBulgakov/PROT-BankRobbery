@@ -84,16 +84,16 @@ namespace Tracking {
             // if (_currentAnchor == null) {
             TrackableWorld.CorrectWithAnchor(marker);
             _mainAnchor = marker;
-            _anchorHighlight.transform.position = _mainAnchor.transform.position;
-            _anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
+
+            updateHighlight();
             // }
         }
 
         private void OnMarkerUpdate(WallMarker marker)
         {
             TrackableWorld.CorrectWithAnchor(marker);
-                        _anchorHighlight.transform.position = _mainAnchor.transform.position;
-            _anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
+
+            updateHighlight();
         }
 
         private void OnMarkerLost(WallMarker marker)
@@ -105,10 +105,16 @@ namespace Tracking {
                 {
                     // make another anchor main
                     _mainAnchor = _currentAnchors[_currentAnchors.Count - 1];
-                    _anchorHighlight.transform.position = _mainAnchor.transform.position;
-                    _anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
+
+                   updateHighlight();
                 }
             }
+        }
+
+        private void updateHighlight()
+        {
+            _anchorHighlight.transform.position = _mainAnchor.transform.position;
+            _anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
         }
     /*    #region correct world anchor
         public void TranslateForwardAnchor()

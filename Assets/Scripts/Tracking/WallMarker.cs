@@ -59,8 +59,10 @@ namespace Tracking
             Debug.Log("image anchor added");
             if (arImageAnchor.referenceImageName == referenceImage.imageName)
             {
-				Anchor.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
-				Anchor.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);                
+				transform.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
+				transform.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);  
+
+                            
 
 				if (Marker!=null)
                 {
@@ -80,8 +82,8 @@ namespace Tracking
             {
 				_lastTimeUpdate = Time.time;
 
-                Anchor.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
-                Anchor.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
+                transform.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
+                transform.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
 
 				if (update != null ) 
 				{

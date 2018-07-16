@@ -41,7 +41,7 @@ namespace Tracking
             if (marker != null)
             {
 
-                var targetAnchor = marker.getMarkerTr();
+                var targetAnchor = marker.Anchor;
                 var stageAnchor = marker.TargetAnchor;               
                 stageAnchor.SetParent(transform.parent, true);
                 transform.SetParent(stageAnchor, true);
