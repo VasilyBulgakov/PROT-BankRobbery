@@ -12,14 +12,13 @@ namespace Tracking
         public WallMarker[] Anchors;
 
  
+        private bool firstCorrection = true;
         private void Start()
         {
             // #if UNITY_EDITOR
             // StartCoroutine(correctInEditor());
             // #endif
-        }
-
- 
+        } 
 
         System.Collections.IEnumerator correctInEditor(){
             int index  = 0;
@@ -48,8 +47,13 @@ namespace Tracking
                 stageAnchor.SetParent(transform.parent);
                 transform.SetParent(stageAnchor);
                 //why sometimes rotates??????????????????????
-                if(targetAnchor)
+                if(firstCorrection)
+                {
                     stageAnchor.SetPositionAndRotation(targetAnchor.position, targetAnchor.rotation);
+                    firstCorrection = false;
+                }
+                else
+                    stageAnchor.position = targetAnchor.position;
 
                 transform.SetParent(stageAnchor.parent);
                 stageAnchor.SetParent(transform);

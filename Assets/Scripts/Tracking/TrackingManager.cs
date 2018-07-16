@@ -92,6 +92,8 @@ namespace Tracking {
         private void OnMarkerUpdate(WallMarker marker)
         {
             TrackableWorld.CorrectWithAnchor(marker);
+                        _anchorHighlight.transform.position = _mainAnchor.transform.position;
+            _anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
         }
 
         private void OnMarkerLost(WallMarker marker)
