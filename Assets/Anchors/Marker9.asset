@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Marker9
   m_EditorClassIdentifier: 
   imageName: Marker9
-  imageTexture: {fileID: 2800000, guid: c2cb228a02f51384383bc439644847cd, type: 3}
+  imageTexture: {fileID: 2800000, guid: 501bb6df937b1734e9b1fd4a214fc978, type: 3}
   physicalSize: 0.21

@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9e72e569759fe4a922c44faf0212c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMask: {r: 1, g: 0.80689657, b: 0, a: 0.7019608}
+  colorMask: {r: 1, g: 0.64137936, b: 0, a: 1}
   isVisible: 1
   _countFlash: 5
   _timeFlash: 1
