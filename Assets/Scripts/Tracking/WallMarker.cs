@@ -109,7 +109,7 @@ namespace Tracking
 			{
 				timer += Time.deltaTime;
 
-                m.SetColor("_Color", new Color( 1f - timer/time,1f,1f, 0.7f ));
+                m.SetColor("_Color", new Color( 1f,1f - timer/time,1f - timer/time, 0.7f ));
                 
 				yield return new WaitForSeconds(0.1f);
 			}
