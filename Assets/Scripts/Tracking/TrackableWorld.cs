@@ -45,7 +45,7 @@ namespace Tracking
                 var stageAnchor = marker.TargetAnchor;               
                 stageAnchor.SetParent(transform.parent);
                 transform.SetParent(stageAnchor);
-                //why sometimes rotates??????????????????????
+                //why rotates on even corrections??????????????????????
                 
                 stageAnchor.SetPositionAndRotation(targetAnchor.position, targetAnchor.rotation);
 
