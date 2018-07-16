@@ -46,6 +46,14 @@ namespace Tracking
             // #endif
         }
 
+        public Transform getMarkerTr()
+        {
+            if(_myMarker)
+                return _myMarker.transform;
+            else
+                return null;
+        }
+
         void AddImageAnchor(ARImageAnchor arImageAnchor)
         {
             Debug.Log("image anchor added");
@@ -78,7 +86,7 @@ namespace Tracking
 				if (update != null ) 
 				{
 					update (this);
-					if (Marker!=null) {
+					if (_myMarker!=null) {
 						_myMarker.transform.SetPositionAndRotation(Anchor.position, Anchor.rotation);
 						//StartCoroutine (HideMarker ());
 					}

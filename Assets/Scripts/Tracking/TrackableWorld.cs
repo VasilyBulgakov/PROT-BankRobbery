@@ -12,7 +12,7 @@ namespace Tracking
         public WallMarker[] Anchors;
 
  
-        private bool firstCorrection = true;
+
         private void Start()
         {
             // #if UNITY_EDITOR
@@ -41,19 +41,14 @@ namespace Tracking
             if (marker != null)
             {
 
-                var targetAnchor = marker.Anchor;
-                var stageAnchor = marker.TargetAnchor;
-                if(stageAnchor == null) return;
+                var targetAnchor = marker.getMarkerTr();
+                var stageAnchor = marker.TargetAnchor;               
                 stageAnchor.SetParent(transform.parent);
                 transform.SetParent(stageAnchor);
                 //why sometimes rotates??????????????????????
-                if(firstCorrection)
-                {
-                    stageAnchor.SetPositionAndRotation(targetAnchor.position, targetAnchor.rotation);
-                    firstCorrection = false;
-                }
-                else
-                    stageAnchor.position = targetAnchor.position;
+                
+                stageAnchor.SetPositionAndRotation(targetAnchor.position, targetAnchor.rotation);
+
 
                 transform.SetParent(stageAnchor.parent);
                 stageAnchor.SetParent(transform);
