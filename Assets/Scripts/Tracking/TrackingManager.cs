@@ -17,8 +17,11 @@ namespace Tracking {
 		        
         private Coroutine _coroutineLocalization;
 
-        public GameObject anchorHighlight;
-        private GameObject _anchorHighlight;
+        public GameObject mainAnchorHighlight;
+
+        private GameObject _mainAnchorHighlight;
+
+
 
         private void Start() {
 			if (Stage == null) {
@@ -34,8 +37,12 @@ namespace Tracking {
                 marker.update += OnMarkerUpdate;
                 marker.detectionLost += OnMarkerLost;
             }
-            if(anchorHighlight != null)
-                _anchorHighlight = GameObject.Instantiate(anchorHighlight);
+            if(mainAnchorHighlight != null)
+            {
+                _mainAnchorHighlight = GameObject.Instantiate(mainAnchorHighlight);
+
+            }
+
 
             //FloorMarker.SetActive(false);
 
@@ -113,8 +120,8 @@ namespace Tracking {
 
         private void updateHighlight()
         {
-            _anchorHighlight.transform.position = _mainAnchor.transform.position;
-            _anchorHighlight.transform.rotation = _mainAnchor.transform.rotation;
+            _mainAnchorHighlight.transform.position = _mainAnchor.transform.position;
+            _mainAnchorHighlight.transform.rotation = _mainAnchor.transform.rotation;                             
         }
     /*    #region correct world anchor
         public void TranslateForwardAnchor()

@@ -68,6 +68,7 @@ namespace Tracking
                 {
                     _myMarker = Instantiate(Marker, Anchor.position, Anchor.rotation);
                     _myMarker.GetComponent<MarkerQuadScript>().setARImage(referenceImage);
+                    StartCoroutine (HideMarker ());
                 }
                 if (detected != null)
 					detected(this);
@@ -82,16 +83,16 @@ namespace Tracking
             {
 				_lastTimeUpdate = Time.time;
 
-                transform.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
-                transform.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
+                Anchor.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
+                Anchor.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
 
 				if (update != null ) 
 				{
 					update (this);
 					if (_myMarker!=null) {
 						_myMarker.transform.SetPositionAndRotation(Anchor.position, Anchor.rotation);
-						//StartCoroutine (HideMarker ());
-					}
+						StartCoroutine (HideMarker ());
+					}             
 
 				}
             }
@@ -99,19 +100,23 @@ namespace Tracking
         }
 		private IEnumerator HideMarker()
 		{
+            var m = _myMarker.GetComponentInChildren<Renderer>().material;
+            m.SetColor("_Color", Color.white);
 			float timer = 0;
 			float time = _timeUpdateMarker * 0.5f;
 			while (timer < time) 
 			{
 				timer += Time.deltaTime;
-				yield return null;
 
+                m.SetColor("_Color", new Color(1,1,1, 1 - timer/time));
+                
+				yield return new WaitForSeconds(0.1f);
 			}
-			if (_myMarker!=null)
-			{
-				Destroy(_myMarker);
-				_myMarker = null; 
-			}
+			// if (_myMarker!=null)
+			// {
+			// 	Destroy(_myMarker);
+			// 	_myMarker = null; 
+			// }
 		}
 
         void RemoveImageAnchor(ARImageAnchor arImageAnchor)

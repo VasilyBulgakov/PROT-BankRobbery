@@ -497,7 +497,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4056946763305766, guid: 9c2f4cc3b987e2d41a4158026fa314ba, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114307497615699038, guid: 9c2f4cc3b987e2d41a4158026fa314ba,
         type: 2}
@@ -869,7 +869,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stage: {fileID: 1346713412}
   TrackableWorld: {fileID: 30278370}
-  anchorHighlight: {fileID: 1131598258291884, guid: e4a3c324ac27ea2489a1e3885eb58fdd,
+  mainAnchorHighlight: {fileID: 1131598258291884, guid: e4a3c324ac27ea2489a1e3885eb58fdd,
+    type: 2}
+  normalAnchorHighlight: {fileID: 1131598258291884, guid: 03e0f9c128f86004db23c3756908e89f,
     type: 2}
 --- !u!4 &1396896950
 Transform:
@@ -882,7 +884,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1396896951
 MonoBehaviour:
