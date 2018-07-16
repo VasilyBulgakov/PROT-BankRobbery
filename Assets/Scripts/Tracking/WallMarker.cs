@@ -69,6 +69,7 @@ namespace Tracking
                     _myMarker = Instantiate(Marker, Anchor.position, Anchor.rotation);
                     _myMarker.GetComponent<MarkerQuadScript>().setARImage(referenceImage);
                     StartCoroutine (HideMarker ());
+                    
                 }
                 if (detected != null)
 					detected(this);
@@ -103,12 +104,12 @@ namespace Tracking
             var m = _myMarker.GetComponentInChildren<Renderer>().material;
             m.SetColor("_Color", Color.white);
 			float timer = 0;
-			float time = _timeUpdateMarker * 0.5f;
+			float time = _timeUpdateMarker;
 			while (timer < time) 
 			{
 				timer += Time.deltaTime;
 
-                m.SetColor("_Color", new Color(1,1,1, 1 - timer/time));
+                m.SetColor("_Color", new Color( 1f - timer/time,1f,1f, 0.7f ));
                 
 				yield return new WaitForSeconds(0.1f);
 			}
