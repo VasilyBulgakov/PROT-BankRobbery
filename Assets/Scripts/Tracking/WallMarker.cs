@@ -47,6 +47,8 @@ namespace Tracking
 				Anchor.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
 				Anchor.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
 
+                
+
 				if (Marker!=null)
                 {
                     _myMarker = Instantiate(Marker, Anchor.position, Anchor.rotation);
