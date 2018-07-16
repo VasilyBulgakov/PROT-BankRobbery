@@ -11,8 +11,28 @@ namespace Tracking
 
         public WallMarker[] Anchors;
 
+ 
         private void Start()
         {
+            // #if UNITY_EDITOR
+            // StartCoroutine(correctInEditor());
+            // #endif
+        }
+
+ 
+
+        System.Collections.IEnumerator correctInEditor(){
+            int index  = 0;
+            while(true)
+            {
+                index++;
+                if(index >= Anchors.Length) index = 0;
+                var a = Anchors[index];
+                if(a)
+                    CorrectWithAnchor(a);
+
+                yield return new WaitForSeconds(.1f);
+            }            
         }
 
         public void CorrectWithAnchor(WallMarker marker)
@@ -27,7 +47,8 @@ namespace Tracking
                 stageAnchor.SetParent(transform.parent);
                 transform.SetParent(stageAnchor);
                 //why sometimes rotates??????????????????????
-                stageAnchor.SetPositionAndRotation(targetAnchor.position, targetAnchor.rotation);
+                if(targetAnchor)
+                    stageAnchor.SetPositionAndRotation(targetAnchor.position, targetAnchor.rotation);
 
                 transform.SetParent(stageAnchor.parent);
                 stageAnchor.SetParent(transform);

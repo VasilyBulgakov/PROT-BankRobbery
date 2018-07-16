@@ -39,15 +39,20 @@ namespace Tracking
             Anchor = transform;
         }
 
+        private void FixedUpdate() {
+            // #if UNITY_EDITOR
+            // Anchor.position = transform.position;
+            // Anchor.rotation = transform.rotation;
+            // #endif
+        }
+
         void AddImageAnchor(ARImageAnchor arImageAnchor)
         {
             Debug.Log("image anchor added");
             if (arImageAnchor.referenceImageName == referenceImage.imageName)
             {
 				Anchor.position = UnityARMatrixOps.GetPosition(arImageAnchor.transform);
-				Anchor.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);
-
-                
+				Anchor.rotation = UnityARMatrixOps.GetRotation(arImageAnchor.transform);                
 
 				if (Marker!=null)
                 {
